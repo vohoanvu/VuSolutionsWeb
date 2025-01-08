@@ -18,7 +18,6 @@ namespace VuSolutionsWeb.Data
         {
             base.OnModelCreating(builder); // Important: Keep this for Identity tables
 
-            // Customize Identity table names (optional)
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
@@ -27,18 +26,12 @@ namespace VuSolutionsWeb.Data
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
 
-            // Configure ApplicationUser relationships
-            builder.Entity<ApplicationUser>()
+            /* builder.Entity<ApplicationUser>()
                 .HasOne(u => u.Organization)
                 .WithMany()
                 .HasForeignKey(u => u.OrganizationId)
                 .IsRequired(false);
 
-            // Configure ApplicationUserProject (composite key)
-            builder.Entity<ApplicationUserProject>()
-                .HasKey(aup => new { aup.UserId, aup.ProjectId });
-
-            // Configure Project relationships
             builder.Entity<Project>(entity =>
             {
                 entity.HasOne(p => p.Organization)
@@ -54,7 +47,6 @@ namespace VuSolutionsWeb.Data
                     .HasForeignKey(pc => pc.ProjectId);
             });
 
-            // Configure ApplicationUserProject relationships
             builder.Entity<ApplicationUserProject>(entity =>
             {
                 entity.HasOne(aup => aup.User)
@@ -66,12 +58,10 @@ namespace VuSolutionsWeb.Data
                     .HasForeignKey(aup => aup.ProjectId);
             });
 
-            // Configure TimeEntry
             builder.Entity<TimeEntry>()
                 .Property(te => te.Hours)
                 .HasPrecision(18, 2);
 
-            // Configure ContentEntity
             builder.Entity<ContentEntity>(entity =>
             {
                 entity.Property(ce => ce.ContentType)
@@ -79,7 +69,7 @@ namespace VuSolutionsWeb.Data
                 
                 entity.Property(ce => ce.Content)
                     .HasMaxLength(4000);
-            });
+            }); */
         }
     }
 }

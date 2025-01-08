@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace VuSolutionsWeb.Models
 {
     public class Organization
     {
+        [Key]
         public int Id { get; set; }
+        
         public required string Name { get; set; }
         public string? Url { get; set; }
         public string? Address { get; set; }

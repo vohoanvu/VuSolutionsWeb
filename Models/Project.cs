@@ -25,11 +25,13 @@ namespace VuSolutionsWeb.Models
 
     public class ProjectComment
     {
+        [Key]
         public int Id { get; set; }
-        public int ProjectId { get; set; }
+        
         public string? Comment { get; set; }
         public string? Url { get; set; }
-    
+
+        public int ProjectId { get; set; }
         public virtual required Project Project { get; set; }
     }
 }
