@@ -1,0 +1,111 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact Us";
+    ViewData["Message"] = "Please let us know who you are and how we can be of service.";
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table class="w-100" style="max-width: 800px;">
+        <tr>
+            <td>Name</td>
+            <td>
+                <input asp-for="Input.Name" class="form-control" style="width: 500px;" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td>
+                <input asp-for="Input.EmailAddress" class="form-control" style="width: 500px;" />
+                <span asp-validation-for="Input.EmailAddress" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone (Optional)</td>
+            <td>
+                <input asp-for="Input.Phone" class="form-control" style="width: 500px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>
+                <textarea asp-for="Input.Message" class="form-control" style="width: 500px; height: 200px;"></textarea>
+                <span asp-validation-for="Input.Message" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Verify that you are not a bot</td>
+            <td>
+                @* Assuming you have a custom tag helper for Captcha *@
+                <vc:captcha length="3" />
+                <br/>
+                @if (!string.IsNullOrEmpty(ViewData["ErrMessage"]?.ToString()))
+                {
+                    <p class="text-danger">@ViewData["ErrMessage"]</p>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="submit" type="submit" class="btn btn-primary">Send</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<address class="mt-4">
+    <strong>VU SOLUTIONS, LLC</strong><br />
+    60 Nguyen Du, q. Hai Chau<br />
+    Da Nang, Vietnam<br />
+</address>
+
+@* Commented out as in original
+<address>
+    <strong>Contact Email:</strong> <a href="mailto:@noladigital.net">@noladigital.net</a>
+</address>
+*@
+
+<style>
+    td, th {
+        padding: 5px;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Using modern form validation with just-validate
+        const validate = new window.JustValidate('form');
+
+        validate
+            .addField('[name="Input.Name"]', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Name is required',
+                },
+                {
+                    rule: 'minLength',
+                    value: 3,
+                },
+                {
+                    rule: 'maxLength',
+                    value: 30,
+                },
+            ])
+            .addField('[name="Input.EmailAddress"]', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Email is required',
+                },
+                {
+                    rule: 'email',
+                    errorMessage: 'Email is invalid!',
+                },
+            ]);
+    </script>
+}

@@ -1,10 +1,158 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Vu Solutions";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="intro-section">
+                <h1>Full-Stack Software Engineering Excellence</h1>
+                <p>
+                    <span class="hlt">Full-stack software engineer with a Computer Science degree from the University of Oregon</span>, 
+                    specializing in enterprise web application development with a focus on 
+                    <span class="hlt">S.O.L.I.D principles and sustainable architecture</span>.
+                </p>
+                <p>
+                    I strive to create high-quality systems that provide <span class="hlt">VALUE</span> to businesses 
+                    without compromising long-term <span class="hlt">MAINTENANCE COST</span>, leveraging state-of-the-art AI toolbox.
+                </p>
+            </div>
+
+            <!-- Add social links -->
+            <div class="social-links">
+                <a href="https://github.com/vohoanvu" target="_blank" class="social-btn">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/thevuture/" target="_blank" class="social-btn">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <figure>
+                <img src="~/images/Vu_upperbody.png" alt="Vo Hoan Vu" class="img-fluid profile-image" />
+            </figure>
+        </div>
+    </div>
+
+    <div class="tag-cloud">
+        <span>ASP.NET Core</span>
+        <span>REACT</span>
+        <span>Angular</span>
+        <span>C#</span>
+        <span>Kubernetes</span>
+        <span>Docker</span>
+        <span>Azure</span>
+        <span>RabbitMQ</span>
+        <span>GraphQL</span>
+        <span>AI Integration</span>
+        <span>Microservices</span>
+        <span>JavaScript</span>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <h2>About Me</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                With a strong foundation in Computer Science and years of hands-on experience, 
+                I specialize in developing scalable enterprise web applications. My expertise includes:
+            </p>
+            <ul class="expertise-list">
+                <li><span class="hlt">Enterprise Architecture:</span> Design and implementation of scalable, maintainable systems</li>
+                <li><span class="hlt">Full-Stack Development:</span> ASP.NET Core, React/Angular, Cloud Services</li>
+                <li><span class="hlt">AI Integration:</span> Leveraging modern AI tools to enhance development efficiency</li>
+                <li><span class="hlt">Best Practices:</span> S.O.L.I.D principles, Clean Architecture, Test-Driven Development</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <h2>Get In Touch</h2>
+    <div class="contact-info">
+        <p class="email-display">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:vohoanvu96@gmail.com">vohoanvu96@gmail.com</a>
+        </p>
+        <a href="~/files/resume.pdf" target="_blank" class="btn btn-default resume-btn">
+            <i class="fas fa-file-pdf"></i> Download Resume
+        </a>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section Styles {
+    <style>
+        .social-links {
+            margin: 2rem 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--secondary-light);
+            color: var(--text-primary);
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: var(--accent-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--secondary-light);
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .email-display {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .email-display i {
+            color: var(--accent-green);
+            margin-right: 0.5rem;
+        }
+
+        .resume-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .resume-btn i {
+            margin-right: 0.5rem;
+        }
+    </style>
+}

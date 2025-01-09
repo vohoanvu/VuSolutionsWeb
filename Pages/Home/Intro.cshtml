@@ -1,0 +1,100 @@
+﻿@page
+@model IntroModel
+@{
+    ViewData["Title"] = "Introduction";
+}
+
+<div class="intro-content">
+    <h1>Introduction</h1>
+
+    <p>
+        NOLADigital provides software development services centered on the ASP.NET, C#, Windows development stack, including n-tier applications and microservices. NOLA is an offshore team lead by a Senior American Solutions Architect. <span class="hlt">Off</span>Shore rate <span class="amt">$45</span> an hour.
+        <a class="btn btn-default" asp-page="/Home/Contact">Contact us &raquo;</a>
+    </p>
+
+    <figure class="video-container">
+        <iframe 
+            width="100%" 
+            height="550" 
+            src="https://www.youtube.com/embed/EXby-eXAU0Y" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+        <figcaption>Our Principal Solutions Architect introduces himself and NOLA.</figcaption>
+    </figure>
+
+    <div class="tag-cloud">
+        <span>ASP.NET (Core)</span>
+        <span>REACT</span>
+        <span>Angular</span>
+        <span>C#</span>
+        <span>Kubernetties</span>
+        <span>Docker</span>
+        <span>Azure</span>
+        <span>RabbitMQ</span>
+        <span>GraphQL</span>
+        <span>Salesforce</span>
+        <span>Sitecore</span>
+        <span>SharePoint</span>
+        <span>JavaScript</span>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .intro-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .video-container {
+            margin: 2rem 0;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tag-cloud span {
+            background-color: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+
+        .hlt {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .amt {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .btn-default {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #0056b3;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+            color: #fff;
+        }
+    </style>
+}

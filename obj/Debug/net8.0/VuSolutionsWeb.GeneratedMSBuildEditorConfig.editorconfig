@@ -70,6 +70,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/vohoanvu/dev-repository/VuSolutionsWeb/Pages/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9BYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/vohoanvu/dev-repository/VuSolutionsWeb/Pages/Home/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9Db250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/vohoanvu/dev-repository/VuSolutionsWeb/Pages/Home/Intro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9JbnRyby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/vohoanvu/dev-repository/VuSolutionsWeb/Pages/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/vohoanvu/dev-repository/VuSolutionsWeb/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
