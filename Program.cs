@@ -14,12 +14,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
 Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("DefaultConnection")?.Substring(0, 20)}...");
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
+/* builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
     options.SignIn.RequireConfirmedAccount = true
 )
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>(); */
 
-// Add Identity services
+// a more comprehensive configuration than the above
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     // Password settings
@@ -28,6 +28,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
+    options.Password.RequiredUniqueChars = 1;
 
     // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
@@ -36,17 +37,25 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
     // User settings
     options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
+    // SignIn settings
+    options.SignIn.RequireConfirmedEmail = true;
+    options.SignIn.RequireConfirmedAccount = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders()
+.AddDefaultUI();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    //options.Cookie.HttpOnly = true;
     options.LoginPath = "/Account/Login";
     options.LogoutPath = "/Account/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.SlidingExpiration = true;
+    //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
