@@ -6,7 +6,13 @@ using VuSolutionsWeb.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .LogTo(Console.WriteLine, LogLevel.Information)
+    .EnableSensitiveDataLogging(builder.Environment.IsDevelopment())
+);
+
+Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
+Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("DefaultConnection")?.Substring(0, 20)}...");
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
     options.SignIn.RequireConfirmedAccount = true
@@ -67,11 +73,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
-}
 
 app.Run();
