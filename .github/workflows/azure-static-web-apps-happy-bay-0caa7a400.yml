@@ -11,7 +11,6 @@ on:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -20,35 +19,46 @@ jobs:
           submodules: true
           lfs: false
 
-      # Add .NET SDK setup
+      # Debug: List available secrets (names only)
+      - name: List Secrets
+        run: |
+          echo "Available secret names:"
+          echo "${{ toJson(secrets) }}" | jq 'keys'
+
+      # Setup .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '8.0.x'
 
-      # Restore NuGet packages
-      - name: Restore dependencies
-        run: dotnet restore
+      # Build and publish
+      - name: Build and Publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release --no-restore
+          dotnet publish -c Release -o published
 
-      # Build the project
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      # Debug: List contents
+      - name: List Directory Structure
+        run: |
+          echo "Root directory:"
+          ls -la
+          echo "Published directory:"
+          ls -la published
+          echo "Published wwwroot directory:"
+          ls -la published/wwwroot
 
-      # Publish the project
-      - name: Publish
-        run: dotnet publish -c Release -o published
-
-      # Original Build And Deploy step
-      - name: Build And Deploy
+      # Deploy
+      - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_BAY_0CAA7A400 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "published/wwwroot" # Changed to point directly to the wwwroot folder
+          app_location: "published/wwwroot"
           api_location: ""
-          output_location: "" # Changed to empty since we're pointing directly to wwwroot
+          output_location: ""
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
