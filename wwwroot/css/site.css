@@ -1,5 +1,5 @@
 :root {
-  --primary-light: #f0f7f4;    /* Light mint background */
+  --primary-light: #f0f5f7;    /* Light mint background */
   --secondary-light: #e3efe8;   /* Slightly darker mint for sections */
   --accent-green: #2ecc71;      /* Emerald green for highlights */
   --accent-dark: #27ae60;       /* Darker green for hover states */
@@ -89,7 +89,6 @@ body {
 
 
 /* Add these styles to your existing site.css */
-
 .tag-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -114,23 +113,55 @@ body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Expertise list styling */
-.expertise-list {
-  list-style: none;
-  padding: 0;
-  margin: 2rem 0;
+/*Portfolio project section*/
+.projects-section {
+  padding: 4rem 0;
 }
 
-.expertise-list li {
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: var(--secondary-light);
+  padding: 2rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card h3 {
+  color: var(--accent-green);
+  margin-bottom: 0.5rem;
+}
+
+.project-period {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.project-card ul {
   margin: 1rem 0;
-  padding: 1rem;
-  background-color: var(--secondary-light);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent-green);
-  transition: all 0.3s ease;
+  padding-left: 1.5rem;
 }
 
-.expertise-list li:hover {
-  transform: translateX(5px);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-stack span {
+  background: var(--accent-green);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
 }

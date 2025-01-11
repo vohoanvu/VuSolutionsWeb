@@ -1,0 +1,366 @@
+﻿@page
+@model PortfolioModel
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<!-- Professional Timeline Section -->
+<section id="experience" class="experience-section">
+    <h2>My Professional Journey</h2>
+    <div class="timeline">
+        <!-- AF Payments -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>Senior .NET Developer</h3>
+                    <span class="company">AF Payments</span>
+                    <span class="period">January 2024 - November 2024</span>
+                </div>
+                <div class="timeline-body">
+                    <ul class="achievement-list">
+                        <li>Designed and developed the AFBI Reporting tool using .NET Core/C#, integrating with AWS S3 for Parquet datasets</li>
+                        <li>Reduced issue backlog by 70% through systematic resolution of critical bugs and technical debt</li>
+                        <li>Delivered e-Biller payment and Mobile e-load features for the Beep SuperApp</li>
+                        <li>Collaborated with Flutter frontend team to ensure successful production launch</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOLA Digital -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>Full-Stack Software Engineer</h3>
+                    <span class="company">NOLA Digital Consulting</span>
+                    <span class="period">July 2022 – February 2024</span>
+                </div>
+                <div class="timeline-body">
+                    <ul class="achievement-list">
+                        <li>Led multiple successful projects including Clinical Mind's data migration and Racelab Global support</li>
+                        <li>Reduced operational costs by 30% through implementation of Administrative Web App Interface for timesheet tracking and project management</li>
+                        <li>Streamlined developer workflow by creating a LLM-powered productivity tool, integrating JIRA and ChatGPT APIs, resulting in 30% faster research and documentation</li>
+                        <li>Decreased incident resolution time by 60% for Racelab Global's racing systems through systematic support and feature enhancement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SmartDev -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>.NET Developer</h3>
+                    <span class="company">SmartDev Outsourcing</span>
+                    <span class="period">April 2021 - July 2022</span>
+                </div>
+                <div class="timeline-body">
+                    <ul class="achievement-list">
+                        <li>Increased Autumn Singapore user engagement by 20% through new feature development</li>
+                        <li>Achieved 95-100% Sonar Coverage through comprehensive unit testing</li>
+                        <li>Obtained Microsoft Azure Fundamentals Certification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FPT Software -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header">
+                    <h3>Jr .NET Web Developer</h3>
+                    <span class="company">FPT Software</span>
+                    <span class="period">October 2019 - March 2021</span>
+                </div>
+                <div class="timeline-body">
+                    <ul class="achievement-list">
+                        <li>Delivered Angular/.NET MVC/Outsystems projects with 90% satisfaction rate</li>
+                        <li>Reduced production downtime by 40% through technical debt resolution</li>
+                        <li>Obtained Outsystems Associate Developer certification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="projects-section">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+        <!-- BeepSuperApp Project -->
+        <div class="project-card">
+            <h3>BeepSuperApp eWallet Solution</h3>
+            <span class="project-period">2024</span>
+            <p>Enterprise-scale FinTech solution serving millions of users in Philippines:</p>
+            <ul>
+                <li>Engineered automated reporting system processing terabytes of Parquet data from AWS S3</li>
+                <li>Achieved 70% reduction in system issues through strategic technical debt resolution</li>
+                <li>Expanded platform capabilities with e-Biller and Mobile e-load features</li>
+                <li>Enhanced cross-platform stability through Flutter integration</li>
+            </ul>
+            <div class="tech-stack">
+                <span>.NET Core</span>
+                <span>Flutter</span>
+                <span>AWS S3</span>
+                <span>RDL Reports</span>
+            </div>
+            <div class="impact-badges">
+                <span class="impact-badge">70% Bug Reduction</span>
+                <span class="impact-badge">Million+ Users</span>
+            </div>
+        </div>
+
+        <!-- Racelab Global Project -->
+        <div class="project-card">
+            <h3>Racelab Global Racing Systems</h3>
+            <span class="project-period">2023-2024</span>
+            <p>Mission-critical wagering platform for international racing operations:</p>
+            <ul>
+                <li>Achieved 60% reduction in incident reports through proactive system optimization</li>
+                <li>Developed automated venue management system supporting multiple racing types across global time zones</li>
+                <li>Implemented real-time monitoring and reporting infrastructure using AWS Lambda/Datadog</li>
+            </ul>
+            <div class="tech-stack">
+                <span>React</span>
+                <span>NodeJS</span>
+                <span>AWS Lambda</span>
+                <span>Datadog</span>
+            </div>
+            <div class="impact-badges">
+                <span class="impact-badge">70% Bug Reduction</span>
+                <span class="impact-badge">Million+ Users</span>
+            </div>
+        </div>
+
+        <!-- Clinical Mind Project -->
+        <div class="project-card">
+            <h3>Clinical Mind Pharmaceutical SaaS</h3>
+            <span class="project-period">2022-2023</span>
+            <p>Enterprise healthcare platform for pharmaceutical training and certification:</p>
+            <ul>
+                <li>Architected and executed complex data migration strategy with zero data loss</li>
+                <li>Established 95% test coverage ensuring platform reliability</li>
+                <li>Implemented microservices architecture improving system scalability by 40%</li>
+            </ul>
+            <div class="tech-stack">
+                <span>EF Core</span>
+                <span>.NET Core/C#</span>
+                <span>Unit Test</span>
+                <span>Docker</span>
+                <span>Azure</span>
+            </div>
+            <div class="impact-badges">
+                <span class="impact-badge">70% Bug Reduction</span>
+                <span class="impact-badge">Million+ Users</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Certifications Section -->
+<section id="certifications" class="certifications-section">
+    <h2>Professional Certifications</h2>
+    <div class="certifications-grid">
+        <div class="certification-card">
+            <div class="cert-icon">
+                <i class="fab fa-microsoft"></i>
+            </div>
+            <div class="cert-content">
+                <h3>Microsoft Azure Fundamentals</h3>
+                <span class="cert-code">AZ-900</span>
+                <p>Certified in fundamental understanding and application of Azure Infrastructure</p>
+                <span class="cert-year">2022</span>
+            </div>
+        </div>
+
+        <div class="certification-card">
+            <div class="cert-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="cert-content">
+                <h3>Outsystems 11 Associate Web Developer</h3>
+                <p>Certified in Outsystem low-code web app development</p>
+                <span class="cert-year">2020</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <style>
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--accent-green);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            border: 4px solid var(--primary-light);
+        }
+
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: 1.5rem;
+            background: var(--secondary-light);
+            border-radius: 8px;
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .timeline-header {
+            margin-bottom: 1rem;
+        }
+
+        .timeline-header h3 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .company {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .achievement-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievement-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .achievement-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        /* Certifications Styles */
+        .certifications-section {
+            padding: 4rem 0;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certification-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--secondary-light);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cert-icon {
+            font-size: 2rem;
+            color: var(--accent-green);
+        }
+
+        .cert-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-code {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-green);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-year {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+            }
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-dark);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+}
