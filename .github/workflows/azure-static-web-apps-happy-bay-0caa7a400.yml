@@ -46,9 +46,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_BAY_0CAA7A400 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "published" # Changed to point to published folder
+          app_location: "published/wwwroot" # Changed to point directly to the wwwroot folder
           api_location: ""
-          output_location: "wwwroot" # Changed to just wwwroot since we're using the published folder
+          output_location: "" # Changed to empty since we're pointing directly to wwwroot
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
