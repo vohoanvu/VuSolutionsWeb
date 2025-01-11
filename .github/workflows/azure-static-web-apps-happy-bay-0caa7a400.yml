@@ -20,10 +20,13 @@ jobs:
           lfs: false
 
       # Debug: List available secrets (names only)
-      - name: List Secrets
+      - name: Debug Environment
         run: |
-          echo "Available secret names:"
-          echo "${{ toJson(secrets) }}" | jq 'keys'
+          echo "Available secrets:"
+          echo "AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_BAY_0CAA7A400: [exists]"
+          echo "GITHUB_TOKEN: [exists]"
+          echo "Current directory:"
+          pwd
 
       # Setup .NET
       - name: Setup .NET
