@@ -24,6 +24,7 @@ body {
   margin-bottom: 60px;
   background-color: var(--primary-light);
   color: var(--text-primary);
+  padding-bottom: 160px;
 }
 
 /* Footer positioning and styling */
@@ -31,11 +32,118 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+  min-height: 120px;
   background-color: var(--secondary-light);
   border-top: 1px solid var(--accent-green);
+  padding: 1.5rem 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-info {
+  flex-grow: 1;
+}
+
+.footer-info p {
+  margin: 0;
+}
+
+/* Company name styling */
+.company-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.company-name i {
+  color: var(--accent-green);
+}
+
+/* Company details styling */
+.company-details {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Tax ID styling */
+.tax-id {
+  color: var(--text-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.tax-id i {
+  color: var(--accent-green);
+}
+
+/* Separator styling */
+.separator {
+  color: var(--accent-green);
+  font-weight: bold;
+  margin: 0 0.5rem;
+}
+
+/* Address styling */
+.address {
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.address i {
+  color: var(--accent-green);
+}
+
+/* Footer links styling */
+.footer-links {
+  margin-left: 1rem;
+}
+
+.footer-links a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-green);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+  }
+
+  .footer-links {
+      margin-left: 0;
+  }
+
+  .company-details {
+      justify-content: center;
+  }
+
+  .company-name {
+      justify-content: center;
+  }
 }
 
 /* Navigation */
@@ -50,6 +158,10 @@ body {
 
 .nav-link:hover {
   color: var(--accent-green) !important;
+}
+
+.nav-item .nav-link {
+  font-size: 1.5rem;
 }
 
 /* Buttons */
