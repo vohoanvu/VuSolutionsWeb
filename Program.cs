@@ -63,6 +63,12 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -95,4 +101,5 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapHealthChecks("/health");
 app.Run();
