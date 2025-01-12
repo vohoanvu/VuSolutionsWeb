@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VuSolutionsWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5380e5fc5965bb6595d09207333afee71056a398")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c08e1f921ededd86e76c7705b6b2e5d8d590fca")]
 [assembly: System.Reflection.AssemblyProductAttribute("VuSolutionsWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VuSolutionsWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
