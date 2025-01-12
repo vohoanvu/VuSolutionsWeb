@@ -150,6 +150,7 @@ body {
 .navbar {
   background-color: var(--secondary-light) !important;
   border-bottom: 1px solid var(--accent-green);
+  padding: 15px 0;
 }
 
 .nav-link {
@@ -162,6 +163,25 @@ body {
 
 .nav-item .nav-link {
   font-size: 1.5rem;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+.navbar-brand img {
+  margin-right: 8px; /* Adds space between logo and text if you keep the text */
+  transition: transform 0.2s; /* Optional: adds smooth hover effect */
+  height: 60px; /* Increases logo height */
+  width: auto; /* Maintains aspect ratio */
+  max-width: 250px; /* Prevents logo from getting too wide */
+}
+@media (max-width: 768px) {
+  .navbar-brand img {
+      height: 45px; /* Slightly smaller on mobile */
+  }
+}
+.navbar-brand:hover img {
+  transform: scale(1.2); /*slightly enlarges logo on hover */
 }
 
 /* Buttons */

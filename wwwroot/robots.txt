@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vusolutions.azurewebsites.net/sitemap.xml

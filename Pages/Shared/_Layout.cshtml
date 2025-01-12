@@ -3,18 +3,41 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VuSolutions</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Full-Stack Software Engineering Excellence - Enterprise solutions with .NET, Azure, and modern architecture patterns. Professional software development services by Vo Hoan Vu." />
+    <meta name="keywords" content="software engineer, .NET developer, full-stack developer, Azure cloud, enterprise solutions, Vietnam" />
+    <meta name="author" content="Vo Hoan Vu" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vusolutions.azurewebsites.net/" />
+    <meta property="og:title" content="VU Solutions - Full-Stack Software Engineering Excellence" />
+    <meta property="og:description" content="Enterprise software solutions with focus on clean architecture and sustainable development." />
+    <meta property="og:image" content="https://vusolutions.azurewebsites.net/images/og-preview.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://vusolutions.azurewebsites.net/" />
+    <meta name="twitter:title" content="VU Solutions - Full-Stack Software Engineering Excellence" />
+    <meta name="twitter:description" content="Enterprise software solutions with focus on clean architecture and sustainable development." />
+    <meta name="twitter:image" content="https://vusolutions.azurewebsites.net/images/og-preview.png" />
+
+    <title>@ViewData["Title"] - Vu Solutions</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VuSolutionsWeb.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="canonical" href="https://vusolutions.azurewebsites.net@(Context.Request.Path)" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">VU Solutions LLC</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/images/og-preview.png" alt="VU Solutions LLC Logo" height="60" class="d-inline-block align-text-top">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

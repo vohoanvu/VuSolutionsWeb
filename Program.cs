@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VuSolutionsWeb.Data;
 using VuSolutionsWeb.Models;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,6 +71,18 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
+    //SEO Performance optimization
+    app.UseResponseCompression();
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        OnPrepareResponse = ctx =>
+        {
+            const int durationInSeconds = 60 * 60 * 24 * 30; // 30 days
+            ctx.Context.Response.Headers[HeaderNames.CacheControl] = 
+                "public,max-age=" + durationInSeconds;
+        }
+    });
 }
 
 app.UseHttpsRedirection();
