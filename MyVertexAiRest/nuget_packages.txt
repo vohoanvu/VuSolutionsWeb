@@ -1,0 +1,1 @@
+dotnet add package Google.Apis.Auth --version 1.68.0

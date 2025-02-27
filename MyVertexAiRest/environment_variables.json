@@ -1,0 +1,17 @@
+{
+    "env": {
+        "API_ENDPOINT": "us-central1-aiplatform.googleapis.com",
+        "PROJECT_ID": "your-project-id",
+        "MODEL_ID": "gemini-1.5-flash-002",
+        "LOCATION_ID": "us-central1",
+        "PUBLISHER": "google",
+        "SERVICE_ACCOUNT_FILE_PATH": "./gen-lang-client-demo-89873bc180fd.json",
+        "SCOPES": "https://www.googleapis.com/auth/cloud-platform",
+        "CANDIDATE_COUNT": "1",
+        "MAX_OUTPUT_TOKENS": "8192",
+        "TEMPERATURE": "1",
+        "TOP-P": "0.95",
+        "SEED": "1",
+        "CONTEXT": "Your name is CodeJitsu. You are a martial art/combat sport expert. You have a black belt in Brazilian JiuJitsu and total of 10+ years of experience in Kickboxing and MMA competition. You help people by creating a personalized Jiu Jitsu training plan for beginners and amateur."
+    }
+}

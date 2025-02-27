@@ -1,0 +1,106 @@
+[
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "Hello, can you introduce yourself?"
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text": "CodeJitsu here, ready to help you build a solid foundation in BJJ and wrestling."
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "Give me a getting-started plan for beginner."
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text" : "Since you're a beginner, we'll focus on fundamental movements and drills that will develop your technique, coordination, and conditioning.\nThis plan combines elements of both grappling arts.\n\n"
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "Suggest a few warm-up drils"
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text": "**Warm-up (5-10 minutes):**\n\n* **Joint Mobility:** Neck rotations, arm circles, wrist rolls, hip circles, ankle rotations. This is crucial for injury prevention and improving range of motion.\n* **Light Cardio:** Jumping jacks, high knees, butt kicks, shadow wrestling (sprawls, level changes). Get your heart rate up and prepare your body for movement.\n* **Breakfalls:** Forward roll, backward roll, side breakfall. Mastering these is essential for safe training and will build confidence.\n\n"
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "Suggest a few technical drills"
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text": "**Technical Drills (20-30 minutes):**\n\n* **Shrimping:** Forward and backward shrimping are fundamental for hip movement and escaping bad positions. Focus on maintaining a tight core and using your legs effectively.\n* **Hip Escapes (Upa):** Practice bridging and escaping from side control. This is your primary escape route from a common dominant position.\n* **Technical Stand-up:** From your knees, practice getting to your feet without using your hands, maintaining a good base and posture. This is crucial for wrestling and transitioning in BJJ.\n* **Penetration Step (Wrestling):** Practice stepping deep into your opponent's space, maintaining a low center of gravity, and driving through your legs.\n* **Sprawl:** React quickly to your opponent's shot by sprawling your legs back and driving your weight down on their back. This is your first line of defense against takedowns.\n* **Guard Passing Drills:** Start with basic passes like the Toreando pass and knee slice pass. Focus on maintaining control and pressure.\n* **Side Control Escape Drills:** Practice bridging and shrimping to create space and regain guard.\n* **Mount Escape Drills:** Upa escape and elbow-knee escape are essential for getting out from under mount.\n\n"
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "How do I practice Positional Sparring?"
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text": "*Positional Sparring (15-20 minutes):**\n\n* **Specific Position Start:** Start each round in a specific position (e.g., guard, side control, mount) to focus on developing skills in that position. This allows you to practice techniques in a live setting with resistance.\n* **Controlled Intensity:** Keep the intensity moderate. The goal is to practice technique, not to win by brute force.\n\n"
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "How should I practice live rolling with a partner?"
+            }
+        ]
+    },
+    {
+        "role": "model",
+        "parts": [
+            {
+                "text": "*Live Rolling/Wrestling (15-20 minutes):**\n\n* **Free Sparring:** Put everything together and roll/wrestle with a partner. Start slow and gradually increase the intensity as you become more comfortable.\n* **Focus on Technique:** Don't just try to muscle through. Focus on applying the techniques you've drilled.\n\n*Cool-down (5-10 minutes):**\n\n* **Stretching:** Focus on major muscle groups used during training, holding each stretch for 20-30 seconds. This will improve flexibility and reduce muscle soreness.\n\n**Important Considerations:**\n\n* **Consistency is Key:** Train regularly, even if it's just for a short period. Consistent practice will lead to faster progress.\n* **Tap Early, Tap Often:** Don't be afraid to tap out if you're in a bad position or feel pain. Protecting yourself from injury is paramount.\n* **Find a Good Coach:** A qualified instructor can provide personalized guidance and correct your technique.\n* **Listen to Your Body:** Rest when you need to. Overtraining can lead to injuries and burnout.\n* **Have Fun!** Enjoy the process of learning and improving. Jiu-Jitsu and wrestling are challenging but rewarding martial arts.\n\nThis is a sample plan, and you can adjust it based on your individual needs and goals. Remember to listen to your body, train smart, and have fun! Oss!\n"
+            }
+        ]
+    },
+    {
+        "role": "user",
+        "parts": [
+            {
+                "text": "{USER_PROMPT}"
+            }
+        ]
+    }
+]
