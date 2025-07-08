@@ -4,6 +4,62 @@
     ViewData["Title"] = "Portfolio";
 }
 
+<section id="personal-projects" class="personal-projects-section">
+    <h2>PORTFOLIO PROJECTS</h2>
+    <div class="projects-grid">
+        <!-- JRE Clipper Project Card -->
+        <div class="project-card">
+            <h3>JRE Clipper: “What Would Joe Rogan Say?” App</h3>
+            <a href="https://whatwouldjoerogansay.com/" target="_blank">https://whatwouldjoerogansay.com/</a>
+            <p>
+                A website that semantically searches across the Joe Rogan Experience podcast episodes for relevant
+                discussions, delivering results via embedded YouTube players with timestamp navigation. Features a premium
+                option for automated compilation video generation and a fully automated video clips editing workflow.
+            </p>
+            <ul>
+                <li>Built a data inference pipeline to process and transform YouTube transcription datasets.</li>
+                <li>Integrated Vertex AI Vector Search and RAG-based content analysis to deliver highly relevant results.</li>
+            </ul>
+            <div class="tech-stack">
+                <span>.NET</span>
+                <span>Python</span>
+                <span>Nodejs</span>
+                <span>Firebase</span>
+                <span>Cloud Run Functions</span>
+                <span>Vertex AI Vector Search</span>
+                <span>Batch data embeddings API</span>
+                <span>Google Cloud Storage</span>
+                <span>Pub/Sub Queue</span>
+            </div>
+        </div>
+
+        <!-- CodeJitsu Project Card -->
+        <div class="project-card">
+            <h3>CodeJitsu: BJJ Martial Art Training Assistant</h3>
+            <a href="https://thecodejitsu.com/" target="_blank">https://thecodejitsu.com/</a>
+            <p>
+                A SaaS platform designed to enhance Brazilian Jiu-Jitsu training through AI-driven video analysis and
+                curriculum recommendations. Features secure user authentication, class session management, and personalized
+                training plans for students.
+            </p>
+            <ul>
+                <li>Enabled instructors to manage class sessions while providing students with AI-powered drill suggestions and partner matching.</li>
+                <li>Utilized Google Vertex AI Gemini Vision and Text API alongside Grok Live Search API for robust video analysis.</li>
+            </ul>
+            <div class="tech-stack">
+                <span>.NET Core</span>
+                <span>React SPA/TypeScript</span>
+                <span>Vite/NGINX Proxy</span>
+                <span>PostgreSQL</span>
+                <span>Vertex AI Gemini Vision</span>
+                <span>Grok Live Search API</span>
+                <span>Google Cloud Build</span>
+                <span>GKE VM</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Professional Timeline Section -->
 <section id="experience" class="experience-section">
     <h2>My Professional Journey</h2>
@@ -160,7 +216,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <!-- Certifications Section -->
@@ -333,6 +388,56 @@
             margin-top: 0.5rem;
         }
 
+        /* Personal Projects Styles */
+        .personal-projects-section {
+            padding: 4rem 0;
+        }
+
+        .personal-projects-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        /* Common Project Card Styles */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--secondary-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-stack, .impact-badges {
+            margin-top: 1rem;
+        }
+
+        .tech-stack span, .impact-badge {
+            display: inline-block;
+            margin-right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .tech-stack span {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .impact-badge {
+            background: var(--accent-dark);
+            color: white;
+        }
+
         /* Responsive adjustments */
         @@media (max-width: 768px) {
             .timeline::before {
@@ -351,16 +456,6 @@
             .timeline-item:nth-child(even) .timeline-content {
                 margin-left: 60px;
             }
-        }
-
-        .impact-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--accent-dark);
-            color: white;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            margin: 0.5rem 0;
         }
     </style>
 }
