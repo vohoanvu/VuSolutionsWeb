@@ -1,6 +1,7 @@
 ﻿
 using System.Globalization;
 using System.Text.Json;
+using Google.Apis.Auth.OAuth2;
 
 namespace MyGeminiApiRest
 {
