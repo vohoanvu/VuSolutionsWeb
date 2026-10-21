@@ -46,6 +46,12 @@ Flow in `src/worker.js`: validate fields → Turnstile siteverify → insert int
 - Locally, `.dev.vars` (gitignored) holds Cloudflare's public always-pass *test* secret, which returns hostname `example.com` and no action, so real local submissions get 403 by design. Test the happy path against production.
 - **Email** uses Email Routing's `send_email` binding (`EmailMessage` from `cloudflare:email` with a hand-built MIME message), not Email Sending: Email Sending is unavailable on Workers Free, while sending to a verified destination address is free. The binding is locked to `vohoanvu96@gmail.com`; the sender `contact@vusolutions.net` requires Email Routing to stay enabled on the zone. `Reply-To` is the submitter.
 
+## Resume admin (`/admin/resume`, `/api/admin/*`)
+
+- The resume at `/files/Vu-Resume-Latest.pdf` is served by the Worker from KV (`RESUME` binding, `src/resume.js`): `resume:current` plus the last 5 replaced versions under `resume:history:<uploadedAt>`. If KV is empty it falls back to the PDF bundled in `wwwroot/files`. That path is in `run_worker_first`; keep it there or uploads stop showing.
+- Auth is **Supabase Auth** on the dedicated `vusolutions-admin` project (`SUPABASE_URL` var; URL and publishable key also in `appsettings.json` → `Supabase`, both public). The admin page calls the Supabase Auth REST API directly (password grant, no SDK) and keeps the session in `sessionStorage`. `src/auth.js` verifies the Bearer JWT against the project's JWKS (ES256/RS256 only, never HS256), checks issuer, `aud`/`role` = `authenticated`, expiry, and the `ADMIN_EMAILS` allowlist. It fails closed when unconfigured. Don't point it at the CodeJitsu-Prod Supabase project.
+- `npm test` (Node's built-in runner, `test/*.test.mjs`) covers `auth.js` and `resume.js` with a fake KV and locally generated keys; CI runs it before deploying.
+
 ## Design system
 
 The site follows the CodeJitsu "Zen Samurai" design system (source: `D:\vu-repos\bjj-training\MartialArtTrainingAssistant\DESIGN_SYSTEM.md`), ported from Tailwind to plain CSS in `wwwroot/css/site.css`:

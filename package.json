@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "node --test test/auth.test.mjs test/resume.test.mjs",
     "build": "node scripts/prerender.mjs",
     "preview": "wrangler dev",
     "deploy": "wrangler deploy"

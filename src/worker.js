@@ -1,5 +1,8 @@
-// vusolutions.net Worker. Static pages are served from assets; this script only handles /api/*.
+// vusolutions.net Worker. Static pages are served from assets; this script only runs for the paths in
+// wrangler.jsonc `run_worker_first`: /api/* and the resume PDF.
 import { EmailMessage } from "cloudflare:email";
+import { verifyAdmin } from "./auth.js";
+import { RESUME_PATH, handleResumeAdmin, serveResume } from "./resume.js";
 
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const TURNSTILE_ACTION = "contact";
@@ -9,11 +12,29 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    if (url.pathname === RESUME_PATH && (request.method === "GET" || request.method === "HEAD")) {
+      return serveResume(request, env);
+    }
+
     if (url.pathname === "/api/contact") {
       if (request.method !== "POST") {
         return json({ ok: false, error: "Method not allowed." }, 405, { Allow: "POST" });
       }
       return handleContact(request, env, ctx);
+    }
+
+    if (url.pathname.startsWith("/api/admin/")) {
+      const identity = await verifyAdmin(request, env);
+      if (!identity) return json({ ok: false, error: "Unauthorized." }, 401);
+      // Bearer tokens already defeat CSRF; this also rejects any cross-site write outright
+      if (request.method !== "GET" && request.headers.get("Origin") !== url.origin) {
+        return json({ ok: false, error: "Cross-origin request rejected." }, 403);
+      }
+      return handleResumeAdmin(request, env, identity);
+    }
+
+    if (url.pathname === RESUME_PATH) {
+      return json({ ok: false, error: "Method not allowed." }, 405, { Allow: "GET, HEAD" });
     }
 
     return json({ ok: false, error: "Not found." }, 404);

@@ -17,6 +17,7 @@ const pages = [
   ["/Home/Portfolio", "Home/Portfolio.html"],
   ["/Privacy", "Privacy.html"],
   ["/NotFound", "404.html"],
+  ["/admin/resume", "admin/resume.html"], // behind Cloudflare Access
 ];
 
 rmSync(join(root, ".build"), { recursive: true, force: true });

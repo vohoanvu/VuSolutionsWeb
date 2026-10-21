@@ -2,7 +2,7 @@
 @model PortfolioModel
 @{
     ViewData["Title"] = "Portfolio";
-    ViewData["Description"] = "Case studies from Vo Hoan Vu: CodeJitsu, an agentic AI coach for BJJ sparring footage, and JRE Clipper, semantic search across the Joe Rogan Experience. Plus seven years of client work.";
+    ViewData["Description"] = "Case studies from Vo Hoan Vu: CodeJitsu, an AI coach for BJJ sparring footage, and JRE Clipper, semantic search across the Joe Rogan Experience. Plus a B.S. in Computer Science and seven years of client work.";
 }
 
 <section class="hero hero--compact">
@@ -11,13 +11,14 @@
             <p class="eyebrow">Portfolio</p>
             <h1 class="hero__title">Work I designed, built and still run</h1>
             <p class="hero__subtitle">
-                Two products I own end to end, including what went wrong along the way. Then seven years of client
-                work in fintech, pharma, racing and childcare.
+                Two products I own end to end, then seven years of client work in fintech, pharma, racing and
+                childcare.
             </p>
             <div class="hero__actions">
                 <a class="btn btn--ghost-dark" href="#codejitsu">CodeJitsu</a>
                 <a class="btn btn--ghost-dark" href="#jre-clipper">JRE Clipper</a>
                 <a class="btn btn--ghost-dark" href="#experience">Experience</a>
+                <a class="btn btn--ghost-dark" href="#education">Education</a>
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@
         </header>
 
         <figure class="figure figure--hero fade-up">
-            <img src="~/images/portfolio/codejitsu-cover.webp" alt="CodeJitsu launch video frame: &quot;Gemini watches every second&quot; beside the four pipeline steps: Auto-Profiler, Event Logger, Event Verifier, Head Coach" width="1600" height="900" fetchpriority="high" />
+            <img src="~/images/portfolio/codejitsu-hero.webp" alt="CodeJitsu landing page: &quot;AI that reads a BJJ sparring tape&quot;" width="1568" height="372" fetchpriority="high" />
         </figure>
 
         <div class="zen-divider"><span>At a glance</span></div>
@@ -50,7 +51,7 @@
             <dt>Company</dt>
             <dd>Free demo and internal R&amp;D tool at <a href="https://tknq.io" target="_blank" rel="noopener">TKNQ</a>, where I'm CTO</dd>
             <dt>Stack</dt>
-            <dd>Gemini 4 Argon on Vertex AI · .NET 10 microservices · React 19 · Supabase PostgreSQL · Google Cloud · Cloudflare</dd>
+            <dd>Gemini on Vertex AI · .NET 10 microservices · React 19 · Supabase PostgreSQL · Google Cloud · Cloudflare</dd>
             <dt>Live</dt>
             <dd><a href="https://thecodejitsu.com" target="_blank" rel="noopener">thecodejitsu.com</a></dd>
         </dl>
@@ -67,48 +68,12 @@
                 the same as a quarter guard. That's why TKNQ keeps CodeJitsu running as its R&amp;D testbed.
             </p>
 
-            <h3>A four-step agentic pipeline</h3>
-            <p>
-                The first version analysed a whole video in a single Gemini call, which was too much to get right in
-                one pass. I split the job into four focused steps, each with its own reasoning level:
-            </p>
-        </div>
-
-        <ol class="steps steps--4">
-            <li class="step">
-                <span class="step__numeral">I</span>
-                <h4 class="step__title">Profiler</h4>
-                <p class="step__body">Identifies the athlete, their opponent and their style.</p>
-                <span class="badge badge--blue">Medium reasoning</span>
-            </li>
-            <li class="step">
-                <span class="step__numeral">II</span>
-                <h4 class="step__title">Event Logger</h4>
-                <p class="step__body">Logs every technique with a timestamp.</p>
-                <span class="badge badge--blue">Medium reasoning</span>
-            </li>
-            <li class="step">
-                <span class="step__numeral">III</span>
-                <h4 class="step__title">Verifier</h4>
-                <p class="step__body">Re-checks each logged call and flags low-confidence ones for review.</p>
-                <span class="badge badge--parch">Low reasoning</span>
-            </li>
-            <li class="step">
-                <span class="step__numeral">IV</span>
-                <h4 class="step__title">Head Coach</h4>
-                <p class="step__body">Writes the grade, strengths, weaknesses and drills.</p>
-                <span class="badge badge--gold">High reasoning</span>
-            </li>
-        </ol>
-
-        <div class="prose">
             <h3>Design decisions</h3>
             <ul>
-                <li><strong>The video goes first in every request</strong>, so Gemini reuses it across all four steps through prefix caching instead of paying to re-read it.</li>
                 <li><strong>Analysis runs as a background job</strong> (Hangfire on Postgres), with progress pushed to the browser over SignalR.</li>
                 <li><strong>A person stays in the loop.</strong> Instructors can edit every AI output before a student sees it.</li>
-                <li><strong>Model choice is a setting, not code.</strong> An admin AI Console sets the model, region, reasoning level and token limit per feature, and every run snapshots its settings. Moving to Gemini 4 Argon showed why: it rejects reasoning budgets, has no explicit context caches and ignores sampling settings, so changing the model name alone would have broken the pipeline.</li>
-                <li><strong>Knowing when not to use AI.</strong> Technique search first used Grok live search (dead links), then Gemini with Google Search grounding (40–120 seconds, past the 60-second server limit). A plain YouTube Data API search replaced both: instant, cheap, and only real videos.</li>
+                <li><strong>Model choice is a setting, not code.</strong> An admin AI Console sets the model, region, reasoning level and token limit per feature, and every run snapshots its settings, so a new Gemini generation is a configuration change instead of a redeploy.</li>
+                <li><strong>Knowing when not to use AI.</strong> Technique search first used Grok live search (dead links), then Gemini with Google Search grounding (too slow for the server's time limit). A plain YouTube Data API search replaced both: instant, cheap, and only real videos.</li>
             </ul>
         </div>
 
@@ -128,11 +93,11 @@
             <p>Every analysis costs real money, so the controls had to be fair to users and safe for the budget:</p>
             <ul>
                 <li>3 analyses per account per rolling 24 hours, adjustable live from the AI Console.</li>
-                <li>Failed runs are refunded automatically, and automatic job retries are off. Before that change, one failure could quietly re-run the whole paid pipeline up to ten times.</li>
+                <li>Failed runs are refunded automatically, and automatic job retries are off. Before that change, one failure could quietly re-run the whole paid analysis up to ten times.</li>
                 <li>The limit is checked before upload, two requests can't both take the last slot, and a double-click never costs two runs.</li>
             </ul>
 
-            <h3>Built and operated by a team of AI agents</h3>
+            <h3>Built with a team of AI agents</h3>
             <p>
                 Since March 2026, CodeJitsu has been developed with Claude Code working as five specialised agents,
                 each defined by a role file in the repository. I set direction, answer the product questions and
@@ -155,29 +120,19 @@
             </table>
         </div>
 
-        <div class="prose">
-            <h3>Operations, with the same agents</h3>
-            <ul>
-                <li><strong>June 2026:</strong> moved the production stack to a company-billed Google Cloud project with a keyless setup: VM identity, Secret Manager, and Workload Identity Federation for CI.</li>
-                <li><strong>July 2026:</strong> recovered from a region-wide Google Cloud capacity outage by moving the VM to another zone from a machine image, and added self-healing container restarts.</li>
-                <li><strong>August 2026:</strong> moved to a smaller VM and cut hosting cost roughly in half, from about $24.50 to $12 a month, with memory limits keeping it stable.</li>
-            </ul>
-        </div>
-
         <div class="zen-divider"><span>Results</span></div>
 
         <div class="stats">
-            <div class="stat"><div class="stat__value">4</div><div class="stat__label">focused agentic steps, each with a verification pass</div></div>
             <div class="stat"><div class="stat__value">380</div><div class="stat__label">automated tests across backend and frontend</div></div>
-            <div class="stat"><div class="stat__value">~50%</div><div class="stat__label">lower monthly hosting cost, same behaviour</div></div>
+            <div class="stat"><div class="stat__value">5</div><div class="stat__label">specialised AI agents building the product</div></div>
             <div class="stat"><div class="stat__value">0</div><div class="stat__label">redeploys needed to switch Gemini models</div></div>
+            <div class="stat"><div class="stat__value">3/day</div><div class="stat__label">free analyses per account, with automatic refunds on failure</div></div>
         </div>
 
         <div class="scroll-card u-mt-6">
             <h3 class="scroll-card__title">What I learned</h3>
             <div class="scroll-card__body">
                 <ol>
-                    <li><strong>Small steps beat one big prompt.</strong> Focused steps with a verification pass are easier to tune, test and trust.</li>
                     <li><strong>Models change faster than code ships.</strong> Treating the model as a setting turned a breaking migration into a two-minute change.</li>
                     <li><strong>Not every feature needs a model.</strong> Technique search got faster, cheaper and more reliable without AI.</li>
                     <li><strong>Cost controls are part of the feature.</strong> Refunds, the in-progress guard and disabled retries belonged in version one.</li>
@@ -188,7 +143,7 @@
 
         <div class="card__footer u-pt-5">
             <ul class="badge-list">
-                <li class="badge badge--parch">Gemini 4 Argon</li>
+                <li class="badge badge--parch">Gemini</li>
                 <li class="badge badge--parch">Vertex AI</li>
                 <li class="badge badge--parch">Claude Code</li>
                 <li class="badge badge--parch">.NET 10</li>
@@ -196,8 +151,6 @@
                 <li class="badge badge--parch">SignalR</li>
                 <li class="badge badge--parch">React 19</li>
                 <li class="badge badge--parch">Supabase</li>
-                <li class="badge badge--parch">Compute Engine</li>
-                <li class="badge badge--parch">GitHub Actions</li>
             </ul>
             <a class="btn btn--primary" href="https://thecodejitsu.com" target="_blank" rel="noopener">Try the live demo @Icons.Svg("arrow-up-right", 14)</a>
         </div>
@@ -211,90 +164,106 @@
             <p class="eyebrow">02 · Case study</p>
             <h2 class="section-header__title" id="jre-title">JRE Clipper: "What would Joe Rogan say?"</h2>
             <p class="section-header__description">
-                Type a topic, from jiu-jitsu to bees to aliens, and get the exact moments it came up across the Joe
-                Rogan Experience archive. Each result is an embedded YouTube player with clickable timestamps that jump
-                straight to the discussion.
+                A search engine for the Joe Rogan Experience that finds moments by what was said, not by which
+                episode it was in.
             </p>
         </header>
 
-        <dl class="kv-panel">
-            <dt>Role</dt>
-            <dd>Solo builder: data pipeline, search, video processing and payments</dd>
-            <dt>Model</dt>
-            <dd>Unlimited free search for everyone; premium subscribers get automatically edited compilation videos</dd>
-            <dt>Stack</dt>
-            <dd>Python · .NET · Node.js · Firebase · Vertex AI embeddings and Vector Search · Cloud Run · Pub/Sub · Cloud Storage · Stripe</dd>
-            <dt>Live</dt>
-            <dd><a href="https://whatwouldjoerogansay.com/" target="_blank" rel="noopener">whatwouldjoerogansay.com</a></dd>
-        </dl>
-
-        <div class="prose">
-            <h3>How it works</h3>
-        </div>
-
-        <ol class="steps steps--4">
-            <li class="step">
-                <span class="step__numeral">I</span>
-                <h4 class="step__title">Ingest</h4>
-                <p class="step__body">Python scripts collect episode metadata and transcripts, then clean and segment them.</p>
-            </li>
-            <li class="step">
-                <span class="step__numeral">II</span>
-                <h4 class="step__title">Embed</h4>
-                <p class="step__body">Transcript segments are vectorised with Vertex AI's batch embeddings API.</p>
-            </li>
-            <li class="step">
-                <span class="step__numeral">III</span>
-                <h4 class="step__title">Search</h4>
-                <p class="step__body">Vertex AI Vector Search finds the most relevant segments for a topic; the results come back as timestamped players.</p>
-            </li>
-            <li class="step">
-                <span class="step__numeral">IV</span>
-                <h4 class="step__title">Compile</h4>
-                <p class="step__body">Premium requests go through Pub/Sub to a Cloud Run service that cuts and joins the segments with FFmpeg.</p>
-            </li>
-        </ol>
-
-        <div class="prose">
-            <h3>What went wrong, and the fix</h3>
-            <p>
-                The first compilation videos came out with corrupted segments and the wrong total length. The root
-                causes were mine: seek-based cutting that wasn't frame-accurate, a concat filter where the concat
-                demuxer was needed, mismatched encoding between segments, and FFmpeg errors that were swallowed instead
-                of logged.
-            </p>
-            <p>
-                The fix was to cut segments with trim filters, encode every segment with identical settings, validate
-                each segment's video and audio streams and frame count before joining, check codec compatibility before
-                concatenating, and validate the final video's streams and duration. Every step now logs FFmpeg's
-                errors.
-            </p>
-            <p>
-                The product decision mattered as much as the code. Searches are free and unlimited, using official
-                YouTube embeds. Only video generation is paid, and it requires sign-in.
-            </p>
+        <div class="grid grid--2">
+            <div class="scroll-card">
+                <h3 class="scroll-card__title">The problem, as a fan</h3>
+                <div class="scroll-card__body">
+                    <p>
+                        I've listened to the JRE for years. I'd remember Joe and a guest getting deep into a topic, like
+                        jiu-jitsu, bears or psychedelics, and have no idea which episode it was, let alone where in a
+                        three-hour conversation.
+                    </p>
+                    <p>
+                        Keyword search doesn't help. Episode titles are mostly just the guest's name, and nobody
+                        remembers the exact words that were used.
+                    </p>
+                </div>
+            </div>
+            <div class="scroll-card">
+                <h3 class="scroll-card__title">My solution: search by meaning</h3>
+                <div class="scroll-card__body">
+                    <p>
+                        I split the episode transcripts into short, timestamped segments and turned each one into a
+                        vector embedding with Vertex AI, then indexed them all in Vertex AI Vector Search.
+                    </p>
+                    <p>
+                        Your question is embedded the same way, so the closest segments come back by meaning even when
+                        none of your words match. Each result is an embedded YouTube player that jumps straight to the
+                        moment it was said.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="card__footer u-pt-5">
             <ul class="badge-list">
-                <li class="badge badge--parch">RAG</li>
-                <li class="badge badge--parch">Vector Search</li>
-                <li class="badge badge--parch">Batch embeddings</li>
-                <li class="badge badge--parch">Event-driven</li>
-                <li class="badge badge--parch">FFmpeg</li>
-                <li class="badge badge--parch">Firebase Auth</li>
-                <li class="badge badge--parch">Stripe</li>
+                <li class="badge badge--parch">Data embeddings</li>
+                <li class="badge badge--parch">Semantic search</li>
+                <li class="badge badge--parch">Vertex AI Vector Search</li>
+                <li class="badge badge--parch">Python</li>
+                <li class="badge badge--parch">Google Cloud</li>
             </ul>
             <a class="btn btn--primary" href="https://whatwouldjoerogansay.com/" target="_blank" rel="noopener">Search the archive @Icons.Svg("arrow-up-right", 14)</a>
         </div>
     </div>
 </section>
 
-<!-- ============ Experience ============ -->
-<section class="section" id="experience" aria-labelledby="experience-title">
+<!-- ============ Education ============ -->
+<section class="section" id="education" aria-labelledby="education-title">
     <div class="container">
         <header class="section-header">
-            <p class="eyebrow">03 · Experience</p>
+            <p class="eyebrow">03 · Education</p>
+            <h2 class="section-header__title" id="education-title">Bachelor of Science in Computer Science</h2>
+        </header>
+
+        <article class="credential">
+            <div class="credential__seal" aria-hidden="true">B.S.</div>
+            <div class="credential__body">
+                <p class="credential__degree">Bachelor of Science, Computer Science</p>
+                <p class="credential__school">University of Oregon · College of Arts and Sciences · Eugene, Oregon, USA</p>
+                <dl class="credential__facts">
+                    <div><dt>Coursework completed</dt><dd>2019</dd></div>
+                    <div><dt>Degree conferred</dt><dd>March 22, 2025</dd></div>
+                    <div><dt>Diploma</dt><dd>Digitally signed and certified eDiploma</dd></div>
+                </dl>
+                <div class="credential__actions">
+                    <a class="btn btn--primary" href="https://www.michaelsutter.com/ediploma?fn=diplomastatuscheck&amp;key=0200000051877ea4fecee4295b6e395a54ee59b038eba09117f8a8cd6581017af6767c987731e284c0a09f5cf0b1812e20992b40de3d5eaf698aac33c91a4a1eda45702f" target="_blank" rel="noopener">@Icons.Svg("shield-check", 16) Verify degree</a>
+                    <a class="btn btn--secondary" href="/files/BS_ComputerScience_diploma.pdf" target="_blank" rel="noopener">@Icons.Svg("file-text", 16) View eDiploma (PDF)</a>
+                </div>
+                <p class="credential__note">
+                    "Verify degree" opens the University of Oregon's certified eDiploma status check, run live by
+                    Michael Sutter Document Certification Services.
+                </p>
+            </div>
+        </article>
+
+        <div class="zen-divider"><span>Certifications</span></div>
+
+        <div class="grid grid--2">
+            <article class="card">
+                <p class="card__meta">Microsoft · 2022</p>
+                <h3 class="card__title">Azure Fundamentals (AZ-900)</h3>
+                <div class="card__body"><p>Core Azure infrastructure and services.</p></div>
+            </article>
+            <article class="card">
+                <p class="card__meta">OutSystems · 2020</p>
+                <h3 class="card__title">OutSystems 11 Associate Web Developer</h3>
+                <div class="card__body"><p>Low-code web application development.</p></div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ Experience ============ -->
+<section class="section section--surface" id="experience" aria-labelledby="experience-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">04 · Experience</p>
             <h2 class="section-header__title" id="experience-title">Seven years of shipping for clients</h2>
             <p class="section-header__description">Mostly .NET and C# on the backend, React or Razor on the front, and whatever cloud the client runs.</p>
         </header>
@@ -381,30 +350,10 @@
                 </div>
             </li>
         </ol>
-
-        <div class="zen-divider"><span>Education &amp; certifications</span></div>
-
-        <div class="grid grid--3">
-            <article class="card">
-                <p class="card__meta">2019</p>
-                <h3 class="card__title">Computer &amp; Information Science</h3>
-                <div class="card__body"><p>University of Oregon, Eugene, USA</p></div>
-            </article>
-            <article class="card">
-                <p class="card__meta">Microsoft · 2022</p>
-                <h3 class="card__title">Azure Fundamentals (AZ-900)</h3>
-                <div class="card__body"><p>Core Azure infrastructure and services.</p></div>
-            </article>
-            <article class="card">
-                <p class="card__meta">OutSystems · 2020</p>
-                <h3 class="card__title">OutSystems 11 Associate Web Developer</h3>
-                <div class="card__body"><p>Low-code web application development.</p></div>
-            </article>
-        </div>
     </div>
 </section>
 
-<section class="section section--surface" aria-labelledby="cta-title">
+<section class="section" aria-labelledby="cta-title">
     <div class="container section-header--center">
         <h2 class="section-header__title" id="cta-title">Have something that needs building?</h2>
         <p class="section-header__description">Tell me what you're working on, and I'll tell you honestly whether I'm the right person for it.</p>

@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run Worker tests
+        run: npm test
+
       - name: Prerender static site
         run: npm run build
 

@@ -1,0 +1,288 @@
+@page "/admin/resume"
+@inject IConfiguration Configuration
+@* Prerendered to admin/resume.html. Signs in against Supabase Auth (REST, no SDK) and sends the access token
+   as a Bearer header; the Worker verifies it on every /api/admin call (src/auth.js). *@
+@{
+    ViewData["Title"] = "Resume admin";
+    ViewData["NoIndex"] = true;
+    var supabaseUrl = Configuration["Supabase:Url"];
+    var supabaseKey = Configuration["Supabase:PublishableKey"];
+}
+
+<section class="hero hero--compact">
+    <div class="container hero__inner">
+        <div>
+            <p class="eyebrow">Admin</p>
+            <h1 class="hero__title">Resume</h1>
+            <p class="hero__subtitle">
+                Upload a new PDF and it replaces the resume at <code>/files/Vu-Resume-Latest.pdf</code> everywhere on the
+                site. No redeploy needed. Changes reach every Cloudflare location within about a minute.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="form-status" id="admin-status" role="status" aria-live="polite"></div>
+
+        <form class="card form u-mt-5" id="signin-form" hidden>
+            <p class="card__meta">Admin only</p>
+            <h2 class="card__title">Sign in</h2>
+            <div class="form__row">
+                <div class="field">
+                    <label class="field__label" for="signin-email">Email</label>
+                    <input class="field__input" id="signin-email" name="email" type="email" autocomplete="username" required />
+                </div>
+                <div class="field">
+                    <label class="field__label" for="signin-password">Password</label>
+                    <input class="field__input" id="signin-password" name="password" type="password" autocomplete="current-password" required />
+                </div>
+            </div>
+            <div class="form__footer">
+                <p class="form__note">Signed in only for this browser tab.</p>
+                <button class="btn btn--dark" type="submit" id="signin-submit">Sign in</button>
+            </div>
+        </form>
+
+        <div id="manager" hidden>
+            <div class="form__footer u-mt-5">
+                <p class="form__note" id="signed-in-as"></p>
+                <button class="btn btn--ghost" type="button" id="signout">Sign out</button>
+            </div>
+
+            <div class="grid grid--2 u-mt-5">
+                <article class="card">
+                    <p class="card__meta">Live now</p>
+                    <h2 class="card__title">Current resume</h2>
+                    <div class="card__body" id="current-resume"><p>Loading…</p></div>
+                    <div class="card__footer">
+                        <a class="btn btn--secondary" href="/files/Vu-Resume-Latest.pdf" target="_blank" rel="noopener">@Icons.Svg("file-text", 16) Open live PDF</a>
+                    </div>
+                </article>
+
+                <form class="card form" id="upload-form">
+                    <p class="card__meta">Replace</p>
+                    <h2 class="card__title">Upload a new version</h2>
+                    <div class="field">
+                        <label class="field__label" for="resume-file">PDF file <span class="optional">(max 10 MB)</span></label>
+                        <input class="field__input" id="resume-file" name="file" type="file" accept="application/pdf,.pdf" required />
+                    </div>
+                    <div class="form__footer">
+                        <p class="form__note">The version it replaces is kept below so you can roll back.</p>
+                        <button class="btn btn--dark" type="submit" id="upload-submit">@Icons.Svg("send", 16) <span>Publish</span></button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="zen-divider"><span>Previous versions</span></div>
+
+            <div class="table-wrap">
+                <table class="zen-table">
+                    <thead>
+                        <tr><th scope="col">Uploaded</th><th scope="col">File</th><th scope="col">Size</th><th scope="col">By</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
+                    </thead>
+                    <tbody id="history-rows"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const SUPABASE_URL = "@supabaseUrl".replace(/\/+$/, "");
+            const SUPABASE_KEY = "@supabaseKey";
+            const SESSION_KEY = "vusolutions-admin-session";
+
+            const $ = (id) => document.getElementById(id);
+            const status = $("admin-status");
+            const signinForm = $("signin-form");
+            const manager = $("manager");
+
+            const showStatus = (kind, message) => {
+                status.className = `form-status form-status--${kind} is-visible`;
+                status.textContent = message;
+            };
+            const clearStatus = () => { status.className = "form-status"; };
+            const formatDate = (iso) => new Date(iso).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+            const formatSize = (bytes) => `${(bytes / 1024).toFixed(0)} KB`;
+            const cell = (text) => { const td = document.createElement("td"); td.textContent = text; return td; };
+
+            // ---- Session (Supabase Auth REST) ----
+            const loadSession = () => { try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; } };
+            const saveSession = (s) => { try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)); } catch {} };
+            const dropSession = () => { try { sessionStorage.removeItem(SESSION_KEY); } catch {} };
+
+            async function authRequest(path, body, token) {
+                const response = await fetch(`${SUPABASE_URL}/auth/v1/${path}`, {
+                    method: "POST",
+                    headers: {
+                        apikey: SUPABASE_KEY,
+                        "Content-Type": "application/json",
+                        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                    },
+                    body: body ? JSON.stringify(body) : undefined,
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.error_description || data.msg || data.message || "Sign-in failed.");
+                return data;
+            }
+
+            const toSession = (data) => ({
+                accessToken: data.access_token,
+                refreshToken: data.refresh_token,
+                expiresAt: Math.floor(Date.now() / 1000) + data.expires_in,
+                email: data.user?.email ?? "",
+            });
+
+            async function accessToken() {
+                let session = loadSession();
+                if (!session) return null;
+                if (session.expiresAt - 60 < Date.now() / 1000) {
+                    try {
+                        session = toSession(await authRequest("token?grant_type=refresh_token", { refresh_token: session.refreshToken }));
+                        saveSession(session);
+                    } catch {
+                        dropSession();
+                        return null;
+                    }
+                }
+                return session.accessToken;
+            }
+
+            // ---- Admin API ----
+            async function call(url, options = {}) {
+                const token = await accessToken();
+                if (!token) { showSignIn("Your session has ended. Please sign in again."); throw new Error("signed-out"); }
+                const response = await fetch(url, { ...options, headers: { ...(options.headers || {}), Authorization: `Bearer ${token}` } });
+                const body = await response.json().catch(() => ({}));
+                if (response.status === 401) {
+                    dropSession();
+                    showSignIn("This account isn't allowed to manage the site, or the session expired.");
+                    throw new Error("signed-out");
+                }
+                if (!response.ok || body.ok !== true) throw new Error(body.error || `Request failed (${response.status}).`);
+                return body;
+            }
+
+            function render({ current: meta, history }) {
+                const current = $("current-resume");
+                current.replaceChildren();
+                const p = document.createElement("p");
+                p.textContent = meta
+                    ? `${meta.filename} · ${formatSize(meta.size)} · uploaded ${formatDate(meta.uploadedAt)} by ${meta.uploadedBy}` +
+                      (meta.restoredFrom ? ` (restored from ${formatDate(meta.restoredFrom)})` : "")
+                    : "Nothing uploaded yet. The site is serving the PDF bundled with the last deploy.";
+                current.append(p);
+
+                const rows = $("history-rows");
+                rows.replaceChildren();
+                if (history.length === 0) {
+                    const tr = document.createElement("tr");
+                    const td = cell("No previous versions yet.");
+                    td.colSpan = 5;
+                    tr.append(td);
+                    rows.append(tr);
+                    return;
+                }
+                for (const version of history) {
+                    const tr = document.createElement("tr");
+                    tr.append(cell(formatDate(version.uploadedAt)), cell(version.filename), cell(formatSize(version.size)), cell(version.uploadedBy));
+                    const actions = document.createElement("td");
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "btn btn--ghost";
+                    button.textContent = "Restore";
+                    button.addEventListener("click", () => restore(version));
+                    actions.append(button);
+                    tr.append(actions);
+                    rows.append(tr);
+                }
+            }
+
+            const report = (err) => { if (err.message !== "signed-out") showStatus("error", err.message); };
+
+            async function showManager() {
+                signinForm.hidden = true;
+                manager.hidden = false;
+                $("signed-in-as").textContent = `Signed in as ${loadSession()?.email ?? ""}`;
+                try { render(await call("/api/admin/resume")); } catch (err) { report(err); }
+            }
+
+            function showSignIn(message) {
+                manager.hidden = true;
+                signinForm.hidden = false;
+                if (message) showStatus("error", message); else clearStatus();
+            }
+
+            async function restore(version) {
+                if (!window.confirm(`Make the version from ${formatDate(version.uploadedAt)} live again?`)) return;
+                try {
+                    render(await call("/api/admin/resume/restore", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ key: version.key }),
+                    }));
+                    showStatus("success", "Restored. It will be live everywhere within about a minute.");
+                } catch (err) { report(err); }
+            }
+
+            signinForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const submit = $("signin-submit");
+                submit.disabled = true;
+                try {
+                    const data = await authRequest("token?grant_type=password", {
+                        email: signinForm.elements.email.value.trim(),
+                        password: signinForm.elements.password.value,
+                    });
+                    saveSession(toSession(data));
+                    signinForm.reset();
+                    clearStatus();
+                    await showManager();
+                } catch (err) {
+                    showStatus("error", err.message);
+                } finally {
+                    submit.disabled = false;
+                }
+            });
+
+            $("signout").addEventListener("click", async () => {
+                const session = loadSession();
+                dropSession();
+                if (session) authRequest("logout", null, session.accessToken).catch(() => {});
+                showSignIn();
+            });
+
+            $("upload-form").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const form = event.currentTarget;
+                const file = form.elements.file.files[0];
+                if (!file) return showStatus("error", "Choose a PDF first.");
+                if (file.size > 10 * 1024 * 1024) return showStatus("error", "The PDF must be 10 MB or smaller.");
+
+                const submit = $("upload-submit");
+                submit.disabled = true;
+                try {
+                    render(await call("/api/admin/resume", { method: "POST", body: new FormData(form) }));
+                    form.reset();
+                    showStatus("success", "Published. The new resume will be live everywhere within about a minute.");
+                } catch (err) {
+                    report(err);
+                } finally {
+                    submit.disabled = false;
+                }
+            });
+
+            if (!SUPABASE_URL || !SUPABASE_KEY) {
+                showStatus("error", "Admin sign-in isn't configured yet (Supabase URL and publishable key are missing).");
+            } else if (loadSession()) {
+                showManager();
+            } else {
+                showSignIn();
+            }
+        })();
+    </script>
+}

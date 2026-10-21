@@ -16,6 +16,10 @@
     <meta name="author" content="Vo Hoan Vu" />
     <meta name="theme-color" content="#1E1C19" />
     <link rel="canonical" href="@canonical" />
+    @if (ViewData["NoIndex"] is true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="VU Solutions" />
