@@ -1,179 +1,393 @@
 ﻿@page
 @model IndexModel
+@inject IConfiguration Configuration
 @{
-    ViewData["Title"] = "Vu Solutions";
+    ViewData["Title"] = "Software products & agentic AI workflows";
+    ViewData["Description"] = "Vo Hoan Vu builds SaaS products in .NET, React and the cloud, and designs agentic AI workflows that hold up in production. Founder of VU Solutions, based in Vietnam.";
+    var turnstileSiteKey = Configuration["Turnstile:SiteKey"];
 }
 
-<!-- Hero Section -->
-<section id="home" class="hero-section">
-    <div class="row align-items-center">
-        <div class="col-md-8">
-            <div class="intro-section">
-                <h1 class="main-title">Crafting Enterprise Solutions with Precision</h1>
-                <div class="subtitle-wrapper">
-                    <p class="lead">
-                        Senior Full-stack Software Engineer specializing in 
-                        <span class="hlt">enterprise-grade applications</span> and 
-                        <span class="hlt">scalable architectures</span>
+<section class="hero">
+    <div class="container hero__inner">
+        <div class="fade-up">
+            <p class="eyebrow">VU Solutions · Software &amp; AI engineering · Vietnam</p>
+            <h1 class="hero__title">I build software products, and the AI agents that help run them.</h1>
+            <p class="hero__subtitle">
+                I'm Vu, a software developer and the founder of VU Solutions. I've shipped .NET and React products
+                for fintech, pharma, racing and childcare clients since 2019. These days I also design agentic AI
+                workflows, and I use them to run my own work.
+            </p>
+            <div class="hero__actions">
+                <a class="btn btn--cta btn--lg" href="#contact">Start a conversation</a>
+                <a class="btn btn--ghost-dark btn--lg" href="/Home/Portfolio">See my work @Icons.Svg("arrow-right", 16)</a>
+            </div>
+            <ul class="hero__links">
+                <li><a href="/files/Vu-Resume-Latest.pdf" target="_blank" rel="noopener">@Icons.Svg("file-text", 16) Resume</a></li>
+                <li><a href="https://github.com/vohoanvu" target="_blank" rel="noopener">@Icons.Svg("github", 16) GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/thevuture/" target="_blank" rel="noopener">@Icons.Svg("linkedin", 16) LinkedIn</a></li>
+            </ul>
+        </div>
+        <figure class="hero__portrait fade-up fade-up--2">
+            <img src="~/images/vu-portrait.webp" alt="Vo Hoan Vu" width="408" height="612" fetchpriority="high" />
+            <figcaption>Vo Hoan Vu · Founder</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="now-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">01 · Right now</p>
+            <h2 class="section-header__title" id="now-title">What I'm working on</h2>
+            <p class="section-header__description">
+                VU Solutions is my registered single-member company. Client work, a startup and my own product all
+                run through it.
+            </p>
+        </header>
+        <div class="grid grid--3">
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("briefcase", 20)</span>
+                <p class="card__meta">Client work · Remote</p>
+                <h3 class="card__title">Developer for OWNA</h3>
+                <div class="card__body">
+                    <p>
+                        I work as a remote developer for OWNA, an Australian SaaS company serving the childcare
+                        sector, contracting through VU Solutions.
                     </p>
                 </div>
-                <div class="value-proposition">
+                <div class="card__footer">
+                    <span class="badge badge--blue">Childcare SaaS</span>
+                    <span class="badge badge--parch">Australia</span>
+                </div>
+            </article>
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("building-2", 20)</span>
+                <p class="card__meta">Startup · CTO</p>
+                <h3 class="card__title">CTO of TKNQ</h3>
+                <div class="card__body">
                     <p>
-                        Delivering high-impact solutions through:
+                        TKNQ is an early-stage Australian startup building all-in-one software for Brazilian Jiu-Jitsu
+                        gyms. I own the technical side: architecture, AI research and delivery.
                     </p>
-                    <ul class="value-list">
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="value-content">
-                                <strong>Strategic Technical Leadership</strong>
-                                <span>Aligning technology solutions with business objectives</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="value-content">
-                                <strong>Enterprise Architecture Excellence</strong>
-                                <span>SOLID principles and scalable system design</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="value-content">
-                                <strong>Modern .NET Development</strong>
-                                <span>Cloud-native applications and microservices</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle"></i>
-                            <div class="value-content">
-                                <strong>AI-Enhanced Engineering</strong>
-                                <span>Leveraging cutting-edge AI tools for optimal delivery</span>
-                            </div>
-                        </li>
+                </div>
+                <div class="card__footer">
+                    <a class="link-arrow" href="https://tknq.io" target="_blank" rel="noopener">tknq.io @Icons.Svg("arrow-up-right", 14)</a>
+                </div>
+            </article>
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("sparkles", 20)</span>
+                <p class="card__meta">My product · Live demo</p>
+                <h3 class="card__title">CodeJitsu</h3>
+                <div class="card__body">
+                    <p>
+                        An AI coach that watches BJJ sparring footage and turns it into a timestamped breakdown, a grade
+                        and the drills that fix what went wrong. It's also TKNQ's R&amp;D testbed.
+                    </p>
+                </div>
+                <div class="card__footer">
+                    <a class="link-arrow" href="/Home/Portfolio#codejitsu">Read the case study @Icons.Svg("arrow-right", 14)</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section section--surface" id="services" aria-labelledby="services-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">02 · Services</p>
+            <h2 class="section-header__title" id="services-title">What I can do for you</h2>
+        </header>
+        <div class="grid grid--3">
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("code-xml", 20)</span>
+                <h3 class="card__title">Product engineering</h3>
+                <div class="card__body">
+                    <p>
+                        Web products from the first prototype to production: ASP.NET Core and C#, React and TypeScript,
+                        PostgreSQL, Google Cloud and Cloudflare. I take features end to end, from database migration
+                        to deployed and monitored.
+                    </p>
+                </div>
+            </article>
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("workflow", 20)</span>
+                <h3 class="card__title">Agentic AI workflows</h3>
+                <div class="card__body">
+                    <p>
+                        I design, orchestrate and evaluate multi-step AI pipelines. That means splitting a job into
+                        focused agents, adding verification passes, capping cost and keeping a person in the loop.
+                    </p>
+                    <p>
+                        I run my own development team of AI agents, and my company's bookkeeping and tax workflow runs
+                        on MISA with AI assistance. I've seen where agents break, not just where they shine.
+                    </p>
+                </div>
+            </article>
+            <article class="card">
+                <span class="card__icon">@Icons.Svg("users", 20)</span>
+                <h3 class="card__title">Technical leadership</h3>
+                <div class="card__body">
+                    <p>
+                        For an early-stage team that needs a CTO's judgment before it can hire one: architecture,
+                        delivery plans, cloud operations and cost control. That's my role at TKNQ today.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="approach-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">03 · How I work</p>
+            <h2 class="section-header__title" id="approach-title">Straight answers, both ways</h2>
+        </header>
+        <div class="grid grid--2">
+            <div class="scroll-card">
+                <h3 class="scroll-card__title">Tell me what went wrong</h3>
+                <div class="scroll-card__body">
+                    <p>
+                        I'll tell you plainly when an idea, an estimate or a line of code is wrong, including my own.
+                        I ask for the same in return. If something I shipped missed the mark, say so directly. Problems
+                        found early are cheap; problems softened into politeness are expensive.
+                    </p>
+                </div>
+            </div>
+            <div class="scroll-card">
+                <h3 class="scroll-card__title">Principles I build by</h3>
+                <div class="scroll-card__body">
+                    <ul>
+                        <li><strong>Small steps you can verify.</strong> Four focused AI steps with a check in between beat one clever prompt.</li>
+                        <li><strong>AI only where it earns its place.</strong> I've replaced an AI feature with a plain API call when that was faster, cheaper and more reliable.</li>
+                        <li><strong>Cost and failure are part of the feature.</strong> Quotas, refunds and retries belong in version one, not after the first surprise bill.</li>
                     </ul>
                 </div>
             </div>
-
-            <div class="cta-group">
-                <a href="#contact" class="btn btn-default primary-cta">
-                    <i class="fas fa-paper-plane"></i> Get in Touch
-                </a>
-                <a href="~/files/Vu-Resume-Latest.pdf" target="_blank" class="btn btn-outline secondary-cta">
-                    <i class="fas fa-file-pdf"></i> View Resume
-                </a>
-            </div>
-
-            <div class="social-links">
-                <a href="https://github.com/vohoanvu" target="_blank" class="social-btn">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/thevuture/" target="_blank" class="social-btn">
-                    <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <figure class="profile-wrapper">
-                <img src="~/images/Vu_upperbody.png" alt="Vo Hoan Vu" class="img-fluid profile-image" />
-            </figure>
-        </div>
-    </div>
-
-    <div class="expertise-banner">
-        <div class="tag-cloud">
-            <span>Full-Stack App Prototyping</span>
-            <span>ASP.NET Core</span>
-            <span>Azure Cloud</span>
-            <span>Google Cloud Platform</span>
-            <span>Semantic Vector Search application</span>
-            <span>AI/ML Integration</span>
-            <span>Microservices</span>
-            <span>React/TypeScript</span>
-            <span>System Integration</span>
-            <span>DevOps</span>
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="about-section">
-    <h2>Professional Excellence</h2>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="about-content">
-                <p class="lead-text">
-                    With over 5 years of industry experience and a Computer Science degree from the University of Oregon,
-                    I specialize in building robust, scalable solutions that drive business value.
-                </p>
-                <div class="expertise-grid">
-                    <div class="expertise-card">
-                        <i class="fas fa-code"></i>
-                        <h3>Technical Excellence</h3>
-                        <p>Building maintainable systems using modern architectural patterns and best practices</p>
+<section class="section section--tight" aria-labelledby="work-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">04 · Selected work</p>
+            <h2 class="section-header__title" id="work-title">Products I built and run myself</h2>
+        </header>
+        <div class="grid grid--2">
+            <article class="card card--interactive">
+                <div class="card__media">
+                    <img src="~/images/portfolio/codejitsu-cover.webp" alt="CodeJitsu analysis screen: a sparring video next to the four-step agentic pipeline" width="1600" height="900" loading="lazy" />
+                </div>
+                <h3 class="card__title">CodeJitsu: an AI coach for BJJ sparring footage</h3>
+                <div class="card__body">
+                    <p>A four-step Gemini pipeline that profiles the athletes, logs every technique, re-checks each call and writes the coaching. Built and operated with a team of five AI agents.</p>
+                </div>
+                <div class="card__footer">
+                    <a class="link-arrow" href="/Home/Portfolio#codejitsu">Case study @Icons.Svg("arrow-right", 14)</a>
+                </div>
+            </article>
+            <article class="card card--interactive">
+                <div class="card__media card__media--panel" aria-hidden="true">
+                    <p class="search-mock__prompt">What would Joe Rogan say about…?</p>
+                    <div class="search-mock__field">@Icons.Svg("sparkles", 16) <span>e.g. Jiu Jitsu, Bears, Bees, Aliens</span></div>
+                </div>
+                <p class="card__meta">Semantic search · Video automation</p>
+                <h3 class="card__title">JRE Clipper: "What would Joe Rogan say?"</h3>
+                <div class="card__body">
+                    <p>
+                        Ask about any topic and get the exact moments it came up across the Joe Rogan Experience
+                        archive, with embedded players that jump to each timestamp. Premium users get an automatically
+                        edited compilation video.
+                    </p>
+                </div>
+                <ul class="badge-list">
+                    <li class="badge badge--parch">Vertex AI Vector Search</li>
+                    <li class="badge badge--parch">Cloud Run</li>
+                    <li class="badge badge--parch">FFmpeg</li>
+                </ul>
+                <div class="card__footer">
+                    <a class="link-arrow" href="/Home/Portfolio#jre-clipper">How it works @Icons.Svg("arrow-right", 14)</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section section--surface" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">05 · Contact</p>
+            <h2 class="section-header__title" id="contact-title">Tell me what you're building</h2>
+            <p class="section-header__description">
+                A product to build, an AI workflow that isn't working, or a team that needs technical leadership.
+                Every message comes straight to me.
+            </p>
+        </header>
+
+        <div class="contact">
+            <form class="form card" id="contact-form" action="/api/contact" method="post" novalidate>
+                <div class="form__row">
+                    <div class="field">
+                        <label class="field__label" for="contact-name">Name</label>
+                        <input class="field__input" id="contact-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="contact-name-error" />
+                        <p class="field__error" id="contact-name-error"></p>
                     </div>
-                    <div class="expertise-card">
-                        <i class="fas fa-rocket"></i>
-                        <h3>Innovation Focus</h3>
-                        <p>Leveraging cutting-edge technologies and AI tools to enhance development efficiency</p>
-                    </div>
-                    <div class="expertise-card">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Business Impact</h3>
-                        <p>Delivering solutions that provide measurable value and ROI for businesses</p>
+                    <div class="field">
+                        <label class="field__label" for="contact-email">Email</label>
+                        <input class="field__input" id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="contact-email-error" />
+                        <p class="field__error" id="contact-email-error"></p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="field">
+                    <label class="field__label" for="contact-phone">Phone <span class="optional">(optional)</span></label>
+                    <input class="field__input" id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" aria-describedby="contact-phone-error" />
+                    <p class="field__error" id="contact-phone-error"></p>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="contact-message">Message</label>
+                    <textarea class="field__input" id="contact-message" name="message" required minlength="10" maxlength="5000" placeholder="What are you building, and where are you stuck?" aria-describedby="contact-message-error"></textarea>
+                    <p class="field__error" id="contact-message-error"></p>
+                </div>
 
-<!-- Contact Section -->
-<br />
-<br />
-<section id="contact" class="contact-section">
-    <h2>Let's Connect</h2>
-    <div class="contact-info">
-        <p class="contact-lead">Ready to discuss your next project?</p>
-        <p class="email-display">
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:vohoanvu96@gmail.com">vohoanvu96@gmail.com</a>
-        </p>
-        <div class="contact-actions">
-            <a href="~/files/Vu-Resume-Latest.pdf" target="_blank" class="btn btn-default resume-btn">
-                <i class="fas fa-file-pdf"></i> Download Resume
-            </a>
+                <div class="turnstile-slot" id="contact-turnstile"></div>
+
+                <div class="form-status" id="contact-status" role="status" aria-live="polite"></div>
+
+                <div class="form__footer">
+                    <p class="form__note">Protected by Cloudflare Turnstile. See the <a href="/Privacy">privacy policy</a> for how your message is stored.</p>
+                    <button class="btn btn--dark btn--lg" type="submit" id="contact-submit">
+                        @Icons.Svg("send", 16) <span>Send message</span>
+                    </button>
+                </div>
+            </form>
+
+            <aside aria-label="Other ways to reach me">
+                <ul class="contact-list">
+                    <li>
+                        @Icons.Svg("mail", 16)
+                        <div><strong>Email</strong><a href="mailto:vohoanvu96@gmail.com">vohoanvu96@gmail.com</a></div>
+                    </li>
+                    <li>
+                        @Icons.Svg("file-text", 16)
+                        <div><strong>Resume</strong><a href="/files/Vu-Resume-Latest.pdf" target="_blank" rel="noopener">Download PDF</a></div>
+                    </li>
+                    <li>
+                        @Icons.Svg("linkedin", 16)
+                        <div><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/thevuture/" target="_blank" rel="noopener">in/thevuture</a></div>
+                    </li>
+                    <li>
+                        @Icons.Svg("github", 16)
+                        <div><strong>GitHub</strong><a href="https://github.com/vohoanvu" target="_blank" rel="noopener">vohoanvu</a></div>
+                    </li>
+                    <li>
+                        @Icons.Svg("map-pin", 16)
+                        <div><strong>Location</strong>Vietnam (UTC+7). Working remotely with teams in Australia and beyond.</div>
+                    </li>
+                </ul>
+            </aside>
         </div>
     </div>
 </section>
 
 @section Scripts {
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        (function () {
+            const form = document.getElementById("contact-form");
+            const submit = document.getElementById("contact-submit");
+            const status = document.getElementById("contact-status");
+            const sitekey = "@turnstileSiteKey";
+            let widgetId;
+
+            window.onContactTurnstileLoad = function () {
+                const slot = document.getElementById("contact-turnstile");
+                // The normal widget is a fixed 300px wide; use the compact one on narrow phones
+                const size = slot.clientWidth < 300 ? "compact" : "normal";
+                widgetId = window.turnstile.render(slot, { sitekey, action: "contact", theme: "light", size });
+            };
+
+            const showStatus = (kind, message) => {
+                status.className = `form-status form-status--${kind} is-visible`;
+                status.textContent = message;
+            };
+
+            const setFieldErrors = (errors) => {
+                for (const name of ["name", "email", "phone", "message"]) {
+                    const input = form.elements[name];
+                    const error = document.getElementById(`contact-${name}-error`);
+                    const message = errors[name] || "";
+                    error.textContent = message;
+                    input.setAttribute("aria-invalid", message ? "true" : "false");
+                }
+            };
+
+            const clientErrors = () => {
+                const errors = {};
+                const value = (name) => form.elements[name].value.trim();
+                if (value("name").length < 2) errors.name = "Please enter your name.";
+                if (!form.elements.email.checkValidity() || !value("email")) errors.email = "Please enter a valid email address.";
+                if (value("message").length < 10) errors.message = "Please write a message (at least 10 characters).";
+                return errors;
+            };
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                status.className = "form-status";
+
+                const errors = clientErrors();
+                setFieldErrors(errors);
+                if (Object.keys(errors).length > 0) {
+                    form.elements[Object.keys(errors)[0]].focus();
+                    return;
+                }
+
+                const data = new FormData(form);
+                if (!data.get("cf-turnstile-response")) {
+                    showStatus("error", "Please complete the verification check above the button.");
+                    return;
+                }
+
+                submit.disabled = true;
+                try {
+                    const response = await fetch(form.action, { method: "POST", body: data });
+                    const result = await response.json().catch(() => ({}));
+                    if (!response.ok || result.ok !== true) {
+                        if (result.errors) setFieldErrors(result.errors);
+                        throw new Error(result.error || "Something went wrong. Please try again, or email me directly.");
+                    }
+                    form.reset();
+                    setFieldErrors({});
+                    showStatus("success", "Thanks, your message is on its way. I'll get back to you by email.");
+                } catch (err) {
+                    showStatus("error", err.message);
+                } finally {
+                    submit.disabled = false;
+                    // Turnstile tokens are single-use
+                    if (widgetId !== undefined) window.turnstile.reset(widgetId);
+                }
             });
-        });
+        })();
     </script>
-    <partial name="_ValidationScriptsPartial" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onContactTurnstileLoad&render=explicit" async defer></script>
     <script type="application/ld+json">
         {
             "@@context": "https://schema.org",
             "@@type": "ProfessionalService",
             "name": "VU Solutions",
-            "description": "Full-Stack Software Engineering Excellence",
+            "description": "Software products and agentic AI workflows by Vo Hoan Vu.",
             "url": "https://vusolutions.net",
+            "email": "vohoanvu96@gmail.com",
             "founder": {
                 "@@type": "Person",
-                "name": "Vo Hoan Vu"
+                "name": "Vo Hoan Vu",
+                "jobTitle": "Software developer and founder"
             },
             "address": {
                 "@@type": "PostalAddress",
+                "streetAddress": "60 Nguyen Du, Hai Chau",
                 "addressLocality": "Da Nang",
-                "addressCountry": "Vietnam"
+                "addressCountry": "VN"
             },
             "sameAs": [
                 "https://www.linkedin.com/in/thevuture/",
@@ -181,184 +395,4 @@
             ]
         }
     </script>
-}
-
-@section Styles {
-    <style>
-        .social-links {
-            margin: 2rem 0;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--secondary-light);
-            color: var(--text-primary);
-            border-radius: 25px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            background-color: var(--accent-green);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .contact-info {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--secondary-light);
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .email-display {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .email-display i {
-            color: var(--accent-green);
-            margin-right: 0.5rem;
-        }
-
-        .resume-btn {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-
-        .resume-btn i {
-            margin-right: 0.5rem;
-        }
-
-        /* Enhanced Hero Section */
-        .hero-section {
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .main-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .subtitle-wrapper {
-            margin-bottom: 2rem;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-        }
-
-        .value-proposition {
-            margin: 2rem 0;
-        }
-
-        .value-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .value-list li {
-            margin: 1rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .value-list i {
-            color: var(--accent-green);
-            margin-top: 0.25rem;
-        }
-
-        .value-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .value-content strong {
-            color: var(--text-primary);
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .value-content span {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .primary-cta {
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-        }
-
-        .secondary-cta {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--accent-green);
-            color: var(--accent-green);
-            background: transparent;
-        }
-
-        .secondary-cta:hover {
-            background: var(--accent-green);
-            color: white;
-        }
-
-        /* Expertise Cards */
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .expertise-card {
-            background: var(--secondary-light);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .expertise-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .expertise-card i {
-            font-size: 2rem;
-            color: var(--accent-green);
-            margin-bottom: 1rem;
-        }
-
-        .expertise-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Section Enhancement */
-        .contact-lead {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-actions {
-            margin-top: 2rem;
-        }
-    </style>
 }

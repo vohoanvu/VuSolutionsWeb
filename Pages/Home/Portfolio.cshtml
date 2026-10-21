@@ -2,460 +2,415 @@
 @model PortfolioModel
 @{
     ViewData["Title"] = "Portfolio";
+    ViewData["Description"] = "Case studies from Vo Hoan Vu: CodeJitsu, an agentic AI coach for BJJ sparring footage, and JRE Clipper, semantic search across the Joe Rogan Experience. Plus seven years of client work.";
 }
 
-<section id="personal-projects" class="personal-projects-section">
-    <h2>PORTFOLIO PROJECTS</h2>
-    <div class="projects-grid">
-        <!-- JRE Clipper Project Card -->
-        <div class="project-card">
-            <h3>JRE Clipper: “What Would Joe Rogan Say?” App</h3>
-            <a href="https://whatwouldjoerogansay.com/" target="_blank">https://whatwouldjoerogansay.com/</a>
-            <p>
-                A website that semantically searches across the Joe Rogan Experience podcast episodes for relevant
-                discussions, delivering results via embedded YouTube players with timestamp navigation. Features a premium
-                option for automated compilation video generation and a fully automated video clips editing workflow.
+<section class="hero hero--compact">
+    <div class="container hero__inner">
+        <div class="fade-up">
+            <p class="eyebrow">Portfolio</p>
+            <h1 class="hero__title">Work I designed, built and still run</h1>
+            <p class="hero__subtitle">
+                Two products I own end to end, including what went wrong along the way. Then seven years of client
+                work in fintech, pharma, racing and childcare.
             </p>
-            <ul>
-                <li>Built a data inference pipeline to process and transform YouTube transcription datasets.</li>
-                <li>Integrated Vertex AI Vector Search and RAG-based content analysis to deliver highly relevant results.</li>
-            </ul>
-            <div class="tech-stack">
-                <span>.NET</span>
-                <span>Python</span>
-                <span>Nodejs</span>
-                <span>Firebase</span>
-                <span>Cloud Run Functions</span>
-                <span>Vertex AI Vector Search</span>
-                <span>Batch data embeddings API</span>
-                <span>Google Cloud Storage</span>
-                <span>Pub/Sub Queue</span>
+            <div class="hero__actions">
+                <a class="btn btn--ghost-dark" href="#codejitsu">CodeJitsu</a>
+                <a class="btn btn--ghost-dark" href="#jre-clipper">JRE Clipper</a>
+                <a class="btn btn--ghost-dark" href="#experience">Experience</a>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- CodeJitsu Project Card -->
-        <div class="project-card">
-            <h3>CodeJitsu: BJJ Martial Art Training Assistant</h3>
-            <a href="https://thecodejitsu.com/" target="_blank">https://thecodejitsu.com/</a>
-            <p>
-                A SaaS platform designed to enhance Brazilian Jiu-Jitsu training through AI-driven video analysis and
-                curriculum recommendations. Features secure user authentication, class session management, and personalized
-                training plans for students.
+<!-- ============ CodeJitsu ============ -->
+<section class="section" id="codejitsu" aria-labelledby="codejitsu-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">01 · Case study</p>
+            <h2 class="section-header__title" id="codejitsu-title">CodeJitsu: an AI coach that watches BJJ sparring footage</h2>
+            <p class="section-header__description">
+                Upload a Brazilian Jiu-Jitsu sparring video and get a timestamped match breakdown, a technical grade
+                and the drills that fix what went wrong. The same weaknesses then feed AI-drafted class plans and
+                partner pairings for the next session.
             </p>
+        </header>
+
+        <figure class="figure figure--hero fade-up">
+            <img src="~/images/portfolio/codejitsu-cover.webp" alt="CodeJitsu launch video frame: &quot;Gemini watches every second&quot; beside the four pipeline steps: Auto-Profiler, Event Logger, Event Verifier, Head Coach" width="1600" height="900" fetchpriority="high" />
+        </figure>
+
+        <div class="zen-divider"><span>At a glance</span></div>
+
+        <dl class="kv-panel">
+            <dt>Role</dt>
+            <dd>Solo builder: product, architecture, development and operations</dd>
+            <dt>Timeline</dt>
+            <dd>Hand-built side project from February 2024; developed with a team of AI agents since March 2026</dd>
+            <dt>Company</dt>
+            <dd>Free demo and internal R&amp;D tool at <a href="https://tknq.io" target="_blank" rel="noopener">TKNQ</a>, where I'm CTO</dd>
+            <dt>Stack</dt>
+            <dd>Gemini 4 Argon on Vertex AI · .NET 10 microservices · React 19 · Supabase PostgreSQL · Google Cloud · Cloudflare</dd>
+            <dt>Live</dt>
+            <dd><a href="https://thecodejitsu.com" target="_blank" rel="noopener">thecodejitsu.com</a></dd>
+        </dl>
+
+        <div class="prose">
+            <h3>The problem</h3>
+            <p>
+                A five-minute roll holds dozens of transitions, scrambles and positions that look alike. Coaches can't
+                rewatch every round for every student, so detailed feedback rarely happens. Can a multimodal model act
+                as a reliable second set of eyes for an instructor, and turn that feedback into the next class?
+            </p>
+            <p>
+                It's also a hard benchmark for video AI: long footage, fast action, and a half guard that looks almost
+                the same as a quarter guard. That's why TKNQ keeps CodeJitsu running as its R&amp;D testbed.
+            </p>
+
+            <h3>A four-step agentic pipeline</h3>
+            <p>
+                The first version analysed a whole video in a single Gemini call, which was too much to get right in
+                one pass. I split the job into four focused steps, each with its own reasoning level:
+            </p>
+        </div>
+
+        <ol class="steps steps--4">
+            <li class="step">
+                <span class="step__numeral">I</span>
+                <h4 class="step__title">Profiler</h4>
+                <p class="step__body">Identifies the athlete, their opponent and their style.</p>
+                <span class="badge badge--blue">Medium reasoning</span>
+            </li>
+            <li class="step">
+                <span class="step__numeral">II</span>
+                <h4 class="step__title">Event Logger</h4>
+                <p class="step__body">Logs every technique with a timestamp.</p>
+                <span class="badge badge--blue">Medium reasoning</span>
+            </li>
+            <li class="step">
+                <span class="step__numeral">III</span>
+                <h4 class="step__title">Verifier</h4>
+                <p class="step__body">Re-checks each logged call and flags low-confidence ones for review.</p>
+                <span class="badge badge--parch">Low reasoning</span>
+            </li>
+            <li class="step">
+                <span class="step__numeral">IV</span>
+                <h4 class="step__title">Head Coach</h4>
+                <p class="step__body">Writes the grade, strengths, weaknesses and drills.</p>
+                <span class="badge badge--gold">High reasoning</span>
+            </li>
+        </ol>
+
+        <div class="prose">
+            <h3>Design decisions</h3>
             <ul>
-                <li>Enabled instructors to manage class sessions while providing students with AI-powered drill suggestions and partner matching.</li>
-                <li>Utilized Google Vertex AI Gemini Vision and Text API alongside Grok Live Search API for robust video analysis.</li>
+                <li><strong>The video goes first in every request</strong>, so Gemini reuses it across all four steps through prefix caching instead of paying to re-read it.</li>
+                <li><strong>Analysis runs as a background job</strong> (Hangfire on Postgres), with progress pushed to the browser over SignalR.</li>
+                <li><strong>A person stays in the loop.</strong> Instructors can edit every AI output before a student sees it.</li>
+                <li><strong>Model choice is a setting, not code.</strong> An admin AI Console sets the model, region, reasoning level and token limit per feature, and every run snapshots its settings. Moving to Gemini 4 Argon showed why: it rejects reasoning budgets, has no explicit context caches and ignores sampling settings, so changing the model name alone would have broken the pipeline.</li>
+                <li><strong>Knowing when not to use AI.</strong> Technique search first used Grok live search (dead links), then Gemini with Google Search grounding (40–120 seconds, past the 60-second server limit). A plain YouTube Data API search replaced both: instant, cheap, and only real videos.</li>
             </ul>
-            <div class="tech-stack">
-                <span>.NET Core</span>
-                <span>React SPA/TypeScript</span>
-                <span>Vite/NGINX Proxy</span>
-                <span>PostgreSQL</span>
-                <span>Vertex AI Gemini Vision</span>
-                <span>Grok Live Search API</span>
-                <span>Google Cloud Build</span>
-                <span>GKE VM</span>
+        </div>
+
+        <div class="grid grid--2 u-mt-6">
+            <figure class="figure">
+                <img src="~/images/portfolio/codejitsu-class-curriculum.webp" alt="AI-drafted 60-minute class plan split into warm-up, techniques, drills, sparring and cool-down" width="1053" height="856" loading="lazy" />
+                <figcaption>Weaknesses found in students' videos feed an AI-drafted plan for the next class.</figcaption>
+            </figure>
+            <figure class="figure">
+                <img src="~/images/portfolio/codejitsu-partner-pairs.webp" alt="AI partner pairing: four pairs with the model's written reasoning on belt, experience, weight, height and age" width="1073" height="600" loading="lazy" />
+                <figcaption>A matchmaking service pairs training partners by belt, weight and experience, and explains its reasoning.</figcaption>
+            </figure>
+        </div>
+
+        <div class="prose">
+            <h3>Running a paid AI feature as a free demo</h3>
+            <p>Every analysis costs real money, so the controls had to be fair to users and safe for the budget:</p>
+            <ul>
+                <li>3 analyses per account per rolling 24 hours, adjustable live from the AI Console.</li>
+                <li>Failed runs are refunded automatically, and automatic job retries are off. Before that change, one failure could quietly re-run the whole paid pipeline up to ten times.</li>
+                <li>The limit is checked before upload, two requests can't both take the last slot, and a double-click never costs two runs.</li>
+            </ul>
+
+            <h3>Built and operated by a team of AI agents</h3>
+            <p>
+                Since March 2026, CodeJitsu has been developed with Claude Code working as five specialised agents,
+                each defined by a role file in the repository. I set direction, answer the product questions and
+                review what ships.
+            </p>
+        </div>
+
+        <div class="table-wrap">
+            <table class="zen-table">
+                <thead>
+                    <tr><th scope="col">Agent</th><th scope="col">Responsibility</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Project manager</td><td>Breaks work into tasks, delegates, reviews code, enforces quality checks</td></tr>
+                    <tr><td>Frontend developer</td><td>React and TypeScript UI, state, English and Polish translations</td></tr>
+                    <tr><td>Backend developer</td><td>.NET APIs, domain services, EF Core models and migrations</td></tr>
+                    <tr><td>DevOps engineer</td><td>Docker, Google Cloud, Nginx, CI/CD and deployments</td></tr>
+                    <tr><td>QA tester</td><td>Writes tests, verifies changes, hunts edge cases</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prose">
+            <h3>Operations, with the same agents</h3>
+            <ul>
+                <li><strong>June 2026:</strong> moved the production stack to a company-billed Google Cloud project with a keyless setup: VM identity, Secret Manager, and Workload Identity Federation for CI.</li>
+                <li><strong>July 2026:</strong> recovered from a region-wide Google Cloud capacity outage by moving the VM to another zone from a machine image, and added self-healing container restarts.</li>
+                <li><strong>August 2026:</strong> moved to a smaller VM and cut hosting cost roughly in half, from about $24.50 to $12 a month, with memory limits keeping it stable.</li>
+            </ul>
+        </div>
+
+        <div class="zen-divider"><span>Results</span></div>
+
+        <div class="stats">
+            <div class="stat"><div class="stat__value">4</div><div class="stat__label">focused agentic steps, each with a verification pass</div></div>
+            <div class="stat"><div class="stat__value">380</div><div class="stat__label">automated tests across backend and frontend</div></div>
+            <div class="stat"><div class="stat__value">~50%</div><div class="stat__label">lower monthly hosting cost, same behaviour</div></div>
+            <div class="stat"><div class="stat__value">0</div><div class="stat__label">redeploys needed to switch Gemini models</div></div>
+        </div>
+
+        <div class="scroll-card u-mt-6">
+            <h3 class="scroll-card__title">What I learned</h3>
+            <div class="scroll-card__body">
+                <ol>
+                    <li><strong>Small steps beat one big prompt.</strong> Focused steps with a verification pass are easier to tune, test and trust.</li>
+                    <li><strong>Models change faster than code ships.</strong> Treating the model as a setting turned a breaking migration into a two-minute change.</li>
+                    <li><strong>Not every feature needs a model.</strong> Technique search got faster, cheaper and more reliable without AI.</li>
+                    <li><strong>Cost controls are part of the feature.</strong> Refunds, the in-progress guard and disabled retries belonged in version one.</li>
+                    <li><strong>Agents speed up delivery, not judgment.</strong> Product decisions, reviews and approvals stayed my job, and that's where the quality came from.</li>
+                </ol>
             </div>
+        </div>
+
+        <div class="card__footer u-pt-5">
+            <ul class="badge-list">
+                <li class="badge badge--parch">Gemini 4 Argon</li>
+                <li class="badge badge--parch">Vertex AI</li>
+                <li class="badge badge--parch">Claude Code</li>
+                <li class="badge badge--parch">.NET 10</li>
+                <li class="badge badge--parch">Hangfire</li>
+                <li class="badge badge--parch">SignalR</li>
+                <li class="badge badge--parch">React 19</li>
+                <li class="badge badge--parch">Supabase</li>
+                <li class="badge badge--parch">Compute Engine</li>
+                <li class="badge badge--parch">GitHub Actions</li>
+            </ul>
+            <a class="btn btn--primary" href="https://thecodejitsu.com" target="_blank" rel="noopener">Try the live demo @Icons.Svg("arrow-up-right", 14)</a>
         </div>
     </div>
 </section>
 
-<!-- Professional Timeline Section -->
-<section id="experience" class="experience-section">
-    <h2>My Professional Journey</h2>
-    <div class="timeline">
-        <!-- AF Payments -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>Senior .NET Developer</h3>
-                    <span class="company">AF Payments</span>
-                    <span class="period">January 2024 - November 2024</span>
-                </div>
-                <div class="timeline-body">
-                    <ul class="achievement-list">
-                        <li>Designed and developed the AFBI Reporting tool using .NET Core/C#, integrating with AWS S3 for Parquet datasets</li>
-                        <li>Reduced issue backlog by 70% through systematic resolution of critical bugs and technical debt</li>
-                        <li>Delivered e-Biller payment and Mobile e-load features for the Beep SuperApp</li>
-                        <li>Collaborated with Flutter frontend team to ensure successful production launch</li>
-                    </ul>
-                </div>
-            </div>
+<!-- ============ JRE Clipper ============ -->
+<section class="section section--surface" id="jre-clipper" aria-labelledby="jre-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">02 · Case study</p>
+            <h2 class="section-header__title" id="jre-title">JRE Clipper: "What would Joe Rogan say?"</h2>
+            <p class="section-header__description">
+                Type a topic, from jiu-jitsu to bees to aliens, and get the exact moments it came up across the Joe
+                Rogan Experience archive. Each result is an embedded YouTube player with clickable timestamps that jump
+                straight to the discussion.
+            </p>
+        </header>
+
+        <dl class="kv-panel">
+            <dt>Role</dt>
+            <dd>Solo builder: data pipeline, search, video processing and payments</dd>
+            <dt>Model</dt>
+            <dd>Unlimited free search for everyone; premium subscribers get automatically edited compilation videos</dd>
+            <dt>Stack</dt>
+            <dd>Python · .NET · Node.js · Firebase · Vertex AI embeddings and Vector Search · Cloud Run · Pub/Sub · Cloud Storage · Stripe</dd>
+            <dt>Live</dt>
+            <dd><a href="https://whatwouldjoerogansay.com/" target="_blank" rel="noopener">whatwouldjoerogansay.com</a></dd>
+        </dl>
+
+        <div class="prose">
+            <h3>How it works</h3>
         </div>
 
-        <!-- NOLA Digital -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>Full-Stack Software Engineer</h3>
-                    <span class="company">NOLA Digital Consulting</span>
-                    <span class="period">July 2022 – February 2024</span>
-                </div>
-                <div class="timeline-body">
-                    <ul class="achievement-list">
-                        <li>Led multiple successful projects including Clinical Mind's data migration and Racelab Global support</li>
-                        <li>Reduced operational costs by 30% through implementation of Administrative Web App Interface for timesheet tracking and project management</li>
-                        <li>Streamlined developer workflow by creating a LLM-powered productivity tool, integrating JIRA and ChatGPT APIs, resulting in 30% faster research and documentation</li>
-                        <li>Decreased incident resolution time by 60% for Racelab Global's racing systems through systematic support and feature enhancement</li>
-                    </ul>
-                </div>
-            </div>
+        <ol class="steps steps--4">
+            <li class="step">
+                <span class="step__numeral">I</span>
+                <h4 class="step__title">Ingest</h4>
+                <p class="step__body">Python scripts collect episode metadata and transcripts, then clean and segment them.</p>
+            </li>
+            <li class="step">
+                <span class="step__numeral">II</span>
+                <h4 class="step__title">Embed</h4>
+                <p class="step__body">Transcript segments are vectorised with Vertex AI's batch embeddings API.</p>
+            </li>
+            <li class="step">
+                <span class="step__numeral">III</span>
+                <h4 class="step__title">Search</h4>
+                <p class="step__body">Vertex AI Vector Search finds the most relevant segments for a topic; the results come back as timestamped players.</p>
+            </li>
+            <li class="step">
+                <span class="step__numeral">IV</span>
+                <h4 class="step__title">Compile</h4>
+                <p class="step__body">Premium requests go through Pub/Sub to a Cloud Run service that cuts and joins the segments with FFmpeg.</p>
+            </li>
+        </ol>
+
+        <div class="prose">
+            <h3>What went wrong, and the fix</h3>
+            <p>
+                The first compilation videos came out with corrupted segments and the wrong total length. The root
+                causes were mine: seek-based cutting that wasn't frame-accurate, a concat filter where the concat
+                demuxer was needed, mismatched encoding between segments, and FFmpeg errors that were swallowed instead
+                of logged.
+            </p>
+            <p>
+                The fix was to cut segments with trim filters, encode every segment with identical settings, validate
+                each segment's video and audio streams and frame count before joining, check codec compatibility before
+                concatenating, and validate the final video's streams and duration. Every step now logs FFmpeg's
+                errors.
+            </p>
+            <p>
+                The product decision mattered as much as the code. Searches are free and unlimited, using official
+                YouTube embeds. Only video generation is paid, and it requires sign-in.
+            </p>
         </div>
 
-        <!-- SmartDev -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>.NET Developer</h3>
-                    <span class="company">SmartDev Outsourcing</span>
-                    <span class="period">April 2021 - July 2022</span>
-                </div>
-                <div class="timeline-body">
-                    <ul class="achievement-list">
-                        <li>Increased Autumn Singapore user engagement by 20% through new feature development</li>
-                        <li>Achieved 95-100% Sonar Coverage through comprehensive unit testing</li>
-                        <li>Obtained Microsoft Azure Fundamentals Certification</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- FPT Software -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="timeline-header">
-                    <h3>Jr .NET Web Developer</h3>
-                    <span class="company">FPT Software</span>
-                    <span class="period">October 2019 - March 2021</span>
-                </div>
-                <div class="timeline-body">
-                    <ul class="achievement-list">
-                        <li>Delivered Angular/.NET MVC/Outsystems projects with 90% satisfaction rate</li>
-                        <li>Reduced production downtime by 40% through technical debt resolution</li>
-                        <li>Obtained Outsystems Associate Developer certification</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="card__footer u-pt-5">
+            <ul class="badge-list">
+                <li class="badge badge--parch">RAG</li>
+                <li class="badge badge--parch">Vector Search</li>
+                <li class="badge badge--parch">Batch embeddings</li>
+                <li class="badge badge--parch">Event-driven</li>
+                <li class="badge badge--parch">FFmpeg</li>
+                <li class="badge badge--parch">Firebase Auth</li>
+                <li class="badge badge--parch">Stripe</li>
+            </ul>
+            <a class="btn btn--primary" href="https://whatwouldjoerogansay.com/" target="_blank" rel="noopener">Search the archive @Icons.Svg("arrow-up-right", 14)</a>
         </div>
     </div>
 </section>
 
-<!-- Projects Section -->
-<section id="projects" class="projects-section">
-    <h2>Featured Projects</h2>
-    <div class="projects-grid">
-        <!-- BeepSuperApp Project -->
-        <div class="project-card">
-            <h3>BeepSuperApp eWallet Solution</h3>
-            <span class="project-period">2024</span>
-            <p>Enterprise-scale FinTech solution serving millions of users in Philippines:</p>
-            <ul>
-                <li>Engineered automated reporting system processing terabytes of Parquet data from AWS S3</li>
-                <li>Achieved 70% reduction in system issues through strategic technical debt resolution</li>
-                <li>Expanded platform capabilities with e-Biller and Mobile e-load features</li>
-                <li>Enhanced cross-platform stability through Flutter integration</li>
-            </ul>
-            <div class="tech-stack">
-                <span>.NET Core</span>
-                <span>Flutter</span>
-                <span>AWS S3</span>
-                <span>RDL Reports</span>
-            </div>
-            <div class="impact-badges">
-                <span class="impact-badge">70% Bug Reduction</span>
-                <span class="impact-badge">Million+ Users</span>
-            </div>
-        </div>
+<!-- ============ Experience ============ -->
+<section class="section" id="experience" aria-labelledby="experience-title">
+    <div class="container">
+        <header class="section-header">
+            <p class="eyebrow">03 · Experience</p>
+            <h2 class="section-header__title" id="experience-title">Seven years of shipping for clients</h2>
+            <p class="section-header__description">Mostly .NET and C# on the backend, React or Razor on the front, and whatever cloud the client runs.</p>
+        </header>
 
-        <!-- Racelab Global Project -->
-        <div class="project-card">
-            <h3>Racelab Global Racing Systems</h3>
-            <span class="project-period">2023-2024</span>
-            <p>Mission-critical wagering platform for international racing operations:</p>
-            <ul>
-                <li>Achieved 60% reduction in incident reports through proactive system optimization</li>
-                <li>Developed automated venue management system supporting multiple racing types across global time zones</li>
-                <li>Implemented real-time monitoring and reporting infrastructure using AWS Lambda/Datadog</li>
-            </ul>
-            <div class="tech-stack">
-                <span>React</span>
-                <span>NodeJS</span>
-                <span>AWS Lambda</span>
-                <span>Datadog</span>
-            </div>
-            <div class="impact-badges">
-                <span class="impact-badge">70% Bug Reduction</span>
-                <span class="impact-badge">Million+ Users</span>
-            </div>
-        </div>
+        <ol class="timeline">
+            <li class="timeline__item timeline__item--current">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">Founder &amp; developer</h3>
+                    <span class="timeline__company">VU Solutions LLC</span>
+                    <span class="status-dot status-dot--active">Current</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li>Remote developer for OWNA, an Australian childcare SaaS company.</li>
+                        <li>CTO of TKNQ, an early-stage Australian startup building software for BJJ gyms.</li>
+                        <li>Builds and runs CodeJitsu and JRE Clipper, and runs the company's own bookkeeping and tax workflow on MISA with AI assistance.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="timeline__item">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">Senior .NET Developer</h3>
+                    <span class="timeline__company">Clinical Mind</span>
+                    <span class="timeline__period">Nov 2024 – Apr 2025 · Remote</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li>Automated Speaker Event registration in the CM-GO SaaS platform, saving internal teams about 10 hours a week.</li>
+                        <li>Integrated the MedPro API for real-time sync of the active speakers dataset, removing about 25 hours a month of manual data consolidation.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="timeline__item">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">Senior .NET Developer</h3>
+                    <span class="timeline__company">AF Payments</span>
+                    <span class="timeline__period">Jan 2024 – Nov 2024 · Remote</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li>Built the AFBI reporting tool in .NET: reads Parquet datasets from AWS S3, renders RDL report templates to PDF and emails executive reports.</li>
+                        <li>Cleared 70% of the issue backlog across the Beep SuperApp e-wallet and BeepTransit in the Philippines.</li>
+                        <li>Delivered e-Biller payments and mobile e-load, and worked in Flutter with the frontend team to get the app production-ready.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="timeline__item">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">Full-Stack Software Engineer</h3>
+                    <span class="timeline__company">NOLA Digital Consulting</span>
+                    <span class="timeline__period">Jul 2022 – Feb 2024 · Remote</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li><strong>Racelab Global</strong> (racing odds and wagering, Brisbane): handled production incidents and RCA reports, helping cut the weekly incident rate by over 60%, and built the Auto-close settings feature across countries and race types.</li>
+                        <li><strong>Clinical Mind CM-GO</strong> (pharma SaaS): took over a microservice product from an offshore team, ran a data migration, introduced unit-test coverage and a testing pattern for the wider team.</li>
+                        <li>Built an internal productivity tool that connected JIRA and the ChatGPT API to manage project documentation.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="timeline__item">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">.NET Developer</h3>
+                    <span class="timeline__company">SmartDev</span>
+                    <span class="timeline__period">Apr 2021 – Jul 2022 · Da Nang</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li>Built ASP.NET Core APIs for Autumn, a Singapore finance and wellness app, including OAuth integrations and third-party investment and trading services; the new features grew the user base by about 20%.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="timeline__item">
+                <div class="timeline__header">
+                    <h3 class="timeline__role">Junior .NET Web Developer</h3>
+                    <span class="timeline__company">FPT Software</span>
+                    <span class="timeline__period">Oct 2019 – Mar 2021 · Da Nang</span>
+                </div>
+                <div class="timeline__body">
+                    <ul>
+                        <li>Globe Telecom: fixed root causes behind a 30% drop in incidents and implemented single sign-on with Azure Active Directory.</li>
+                        <li>Orion real-time location tracking: built zone-management APIs and Angular features in .NET Core.</li>
+                    </ul>
+                </div>
+            </li>
+        </ol>
 
-        <!-- Clinical Mind Project -->
-        <div class="project-card">
-            <h3>Clinical Mind Pharmaceutical SaaS</h3>
-            <span class="project-period">2022-2023</span>
-            <p>Enterprise healthcare platform for pharmaceutical training and certification:</p>
-            <ul>
-                <li>Architected and executed complex data migration strategy with zero data loss</li>
-                <li>Established 95% test coverage ensuring platform reliability</li>
-                <li>Implemented microservices architecture improving system scalability by 40%</li>
-            </ul>
-            <div class="tech-stack">
-                <span>EF Core</span>
-                <span>.NET Core/C#</span>
-                <span>Unit Test</span>
-                <span>Docker</span>
-                <span>Azure</span>
-            </div>
-            <div class="impact-badges">
-                <span class="impact-badge">70% Bug Reduction</span>
-                <span class="impact-badge">Million+ Users</span>
-            </div>
+        <div class="zen-divider"><span>Education &amp; certifications</span></div>
+
+        <div class="grid grid--3">
+            <article class="card">
+                <p class="card__meta">2019</p>
+                <h3 class="card__title">Computer &amp; Information Science</h3>
+                <div class="card__body"><p>University of Oregon, Eugene, USA</p></div>
+            </article>
+            <article class="card">
+                <p class="card__meta">Microsoft · 2022</p>
+                <h3 class="card__title">Azure Fundamentals (AZ-900)</h3>
+                <div class="card__body"><p>Core Azure infrastructure and services.</p></div>
+            </article>
+            <article class="card">
+                <p class="card__meta">OutSystems · 2020</p>
+                <h3 class="card__title">OutSystems 11 Associate Web Developer</h3>
+                <div class="card__body"><p>Low-code web application development.</p></div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- Certifications Section -->
-<section id="certifications" class="certifications-section">
-    <h2>Professional Certifications</h2>
-    <div class="certifications-grid">
-        <div class="certification-card">
-            <div class="cert-icon">
-                <i class="fab fa-microsoft"></i>
-            </div>
-            <div class="cert-content">
-                <h3>Microsoft Azure Fundamentals</h3>
-                <span class="cert-code">AZ-900</span>
-                <p>Certified in fundamental understanding and application of Azure Infrastructure</p>
-                <span class="cert-year">2022</span>
-            </div>
-        </div>
-
-        <div class="certification-card">
-            <div class="cert-icon">
-                <i class="fas fa-code"></i>
-            </div>
-            <div class="cert-content">
-                <h3>Outsystems 11 Associate Web Developer</h3>
-                <p>Certified in Outsystem low-code web app development</p>
-                <span class="cert-year">2020</span>
-            </div>
+<section class="section section--surface" aria-labelledby="cta-title">
+    <div class="container section-header--center">
+        <h2 class="section-header__title" id="cta-title">Have something that needs building?</h2>
+        <p class="section-header__description">Tell me what you're working on, and I'll tell you honestly whether I'm the right person for it.</p>
+        <div class="hero__actions u-center u-mt-5">
+            <a class="btn btn--cta btn--lg" href="/#contact">Start a conversation</a>
+            <a class="btn btn--secondary btn--lg" href="/files/Vu-Resume-Latest.pdf" target="_blank" rel="noopener">@Icons.Svg("file-text", 16) Resume</a>
         </div>
     </div>
 </section>
-
-@section Styles {
-    <style>
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-            margin: 2rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background-color: var(--accent-green);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            width: 100%;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--accent-green);
-            border: 4px solid var(--primary-light);
-        }
-
-        .timeline-content {
-            position: relative;
-            width: 45%;
-            padding: 1.5rem;
-            background: var(--secondary-light);
-            border-radius: 8px;
-            margin-left: auto;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 0;
-            margin-right: auto;
-        }
-
-        .timeline-header {
-            margin-bottom: 1rem;
-        }
-
-        .timeline-header h3 {
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .company {
-            font-weight: 600;
-            color: var(--text-primary);
-            display: block;
-        }
-
-        .period {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .achievement-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .achievement-list li {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .achievement-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-        }
-
-        /* Certifications Styles */
-        .certifications-section {
-            padding: 4rem 0;
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .certification-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            background: var(--secondary-light);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .certification-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .cert-icon {
-            font-size: 2rem;
-            color: var(--accent-green);
-        }
-
-        .cert-content h3 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-code {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--accent-green);
-            color: white;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-year {
-            display: block;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Personal Projects Styles */
-        .personal-projects-section {
-            padding: 4rem 0;
-        }
-
-        .personal-projects-section h2 {
-            margin-bottom: 2rem;
-        }
-
-        /* Common Project Card Styles */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: var(--secondary-light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .tech-stack, .impact-badges {
-            margin-top: 1rem;
-        }
-
-        .tech-stack span, .impact-badge {
-            display: inline-block;
-            margin-right: 0.5rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-
-        .tech-stack span {
-            background: var(--accent-green);
-            color: white;
-        }
-
-        .impact-badge {
-            background: var(--accent-dark);
-            color: white;
-        }
-
-        /* Responsive adjustments */
-        @@media (max-width: 768px) {
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-dot {
-                left: 30px;
-            }
-
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px;
-            }
-
-            .timeline-item:nth-child(even) .timeline-content {
-                margin-left: 60px;
-            }
-        }
-    </style>
-}

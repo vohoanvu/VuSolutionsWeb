@@ -1,98 +1,83 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var description = ViewData["Description"] as string
+        ?? "VU Solutions: software products and agentic AI workflows by Vo Hoan Vu, a .NET and React developer based in Vietnam.";
+    var title = ViewData["Title"] is string pageTitle ? $"{pageTitle} | VU Solutions" : "VU Solutions";
+    var path = Context.Request.Path.Value ?? "/";
+    var canonical = $"https://vusolutions.net{path}";
+    string? Current(string href) => string.Equals(path, href, StringComparison.OrdinalIgnoreCase) ? "page" : null;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Full-Stack Software Engineering Excellence - Enterprise solutions with .NET, Azure, and modern architecture patterns. Professional software development services by Vo Hoan Vu." />
-    <meta name="keywords" content="software engineer, .NET developer, full-stack developer, Azure cloud, enterprise solutions, Vietnam" />
+    <title>@title</title>
+    <meta name="description" content="@description" />
     <meta name="author" content="Vo Hoan Vu" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vusolutions.net/" />
-    <meta property="og:title" content="VU Solutions - Full-Stack Software Engineering Excellence" />
-    <meta property="og:description" content="Enterprise software solutions with focus on clean architecture and sustainable development." />
-    <meta property="og:image" content="https://vusolutions.net/images/og-preview.png" />
+    <meta name="theme-color" content="#1E1C19" />
+    <link rel="canonical" href="@canonical" />
 
-    <!-- Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VU Solutions" />
+    <meta property="og:url" content="@canonical" />
+    <meta property="og:title" content="@title" />
+    <meta property="og:description" content="@description" />
+    <meta property="og:image" content="https://vusolutions.net/images/og-preview.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://vusolutions.net/" />
-    <meta name="twitter:title" content="VU Solutions - Full-Stack Software Engineering Excellence" />
-    <meta name="twitter:description" content="Enterprise software solutions with focus on clean architecture and sustainable development." />
+    <meta name="twitter:title" content="@title" />
+    <meta name="twitter:description" content="@description" />
     <meta name="twitter:image" content="https://vusolutions.net/images/og-preview.png" />
 
-    <title>@ViewData["Title"] - Vu Solutions</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans:wght@300;400;500;600&display=swap" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/VuSolutionsWeb.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="icon" type="image/png" href="~/images/favicon.png">
-
-    <link rel="canonical" href="https://vusolutions.net@(Context.Request.Path)" />
-    @await RenderSectionAsync("Styles", required: false)
+    <link rel="icon" type="image/png" href="~/images/favicon.png" />
+    @await RenderSectionAsync("Head", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="~/images/og-preview.png" alt="VU Solutions LLC Logo" height="60" class="d-inline-block align-text-top">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Portfolio">Portfolio</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-            @* <partial name="_LoginPartial" /> *@
+    <header class="navbar">
+        <nav class="container navbar__inner" aria-label="Main">
+            <a class="navbar__brand" href="/">VU <span>·</span> Solutions</a>
+            <button class="navbar__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                @Icons.Svg("menu", 20, "icon-open")
+                @Icons.Svg("x", 20, "icon-close")
+            </button>
+            <ul class="navbar__links" id="nav-links">
+                <li><a class="navbar__link" href="/Home/Portfolio" aria-current="@Current("/Home/Portfolio")">Portfolio</a></li>
+                <li><a class="navbar__link" href="/#services">Services</a></li>
+                <li><a class="navbar__link" href="/files/Vu-Resume-Latest.pdf" target="_blank" rel="noopener">Resume</a></li>
+                <li><a class="navbar__link" href="/#contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <p class="company-name">
-                        <i class="fas fa-building"></i>
-                        <span>&copy; 2025 - VU Solutions LLC</span>
-                    </p>
-                    <p class="company-details">
-                        <span class="tax-id">
-                            <i class="fas fa-file-invoice"></i>
-                            Tax Number: 0402259203
-                        </span>
-                        <span class="separator">•</span>
-                        <span class="address">
-                            <i class="fas fa-location-dot"></i>
-                            60 Nguyen Du, Hai Chau, Da Nang, Vietnam
-                        </span>
-                    </p>
-                </div>
-                <div class="footer-links">
-                    <a asp-area="" asp-page="/Privacy">Privacy</a>
-                </div>
+    <main id="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div>
+                <p class="footer__brand">VU Solutions LLC</p>
+                <p class="footer__details">
+                    <span>@Icons.Svg("building-2", 14) Tax number: 0402259203</span>
+                    <span>@Icons.Svg("map-pin", 14) 60 Nguyen Du, Hai Chau, Da Nang, Vietnam</span>
+                    <span>&copy; @DateTime.UtcNow.Year VU Solutions LLC</span>
+                </p>
             </div>
+            <ul class="footer__links">
+                <li><a href="/Home/Portfolio">Portfolio</a></li>
+                <li><a href="https://github.com/vohoanvu" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/thevuture/" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="/Privacy">Privacy</a></li>
+            </ul>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

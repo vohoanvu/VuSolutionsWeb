@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Cloudflare static build tooling, not part of the ASP.NET app -->
-    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules/**;dist/**;.build/**;.wrangler/**;package*.json;wrangler.jsonc</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules/**;dist/**;.build/**;.wrangler/**;src/**;d1-migrations/**;package*.json;wrangler.jsonc</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>

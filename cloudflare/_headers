@@ -9,6 +9,3 @@
 
 /js/*
   Cache-Control: public, max-age=2592000
-
-/VuSolutionsWeb.styles.css
-  Cache-Control: public, max-age=2592000

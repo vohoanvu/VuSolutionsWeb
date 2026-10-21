@@ -2,7 +2,49 @@
 @model PrivacyModel
 @{
     ViewData["Title"] = "Privacy Policy";
+    ViewData["Description"] = "What VU Solutions collects through vusolutions.net, where it is stored and how to have it deleted.";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="hero hero--compact">
+    <div class="container hero__inner">
+        <div>
+            <p class="eyebrow">Legal</p>
+            <h1 class="hero__title">Privacy policy</h1>
+            <p class="hero__subtitle">Short version: I only collect what you send me through the contact form, I use it only to reply, and I don't sell or share it.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container prose">
+        <p class="eyebrow">Last updated 21 October 2026</p>
+
+        <h3>Who is responsible</h3>
+        <p>
+            VU Solutions LLC, 60 Nguyen Du, Hai Chau, Da Nang, Vietnam (tax number 0402259203). Contact:
+            <a href="mailto:vohoanvu96@gmail.com">vohoanvu96@gmail.com</a>.
+        </p>
+
+        <h3>What the contact form collects</h3>
+        <ul>
+            <li>The name, email address, optional phone number and message you enter.</li>
+            <li>The country your request came from and your browser's user-agent string, which Cloudflare provides with each request. These help me spot spam.</li>
+        </ul>
+
+        <h3>How it is used and stored</h3>
+        <ul>
+            <li>Your message is stored in a Cloudflare D1 database and forwarded to my email inbox so I can reply.</li>
+            <li>I use it only to answer you and follow up on what you asked about. It is never sold, shared for marketing or added to a mailing list.</li>
+            <li>I keep messages only as long as they're useful for that conversation. You can ask me to delete yours at any time by emailing me.</li>
+        </ul>
+
+        <h3>Third-party services</h3>
+        <ul>
+            <li><strong>Cloudflare</strong> hosts this site and runs <a href="https://www.cloudflare.com/products/turnstile/" target="_blank" rel="noopener">Turnstile</a>, the check that keeps bots out of the contact form. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</li>
+            <li><strong>Google Fonts</strong> serves the site's typefaces, so your browser requests them from Google's servers.</li>
+        </ul>
+
+        <h3>Cookies and tracking</h3>
+        <p>This site sets no advertising or analytics cookies. Turnstile may use what it needs to tell people from bots.</p>
+    </div>
+</section>
