@@ -1,0 +1,13 @@
+{
+  "name": "vusolutions-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/prerender.mjs",
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.3"
+  }
+}

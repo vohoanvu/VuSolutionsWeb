@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vusolutions",
+  "compatibility_date": "2026-10-21",
+  // Static-assets-only Worker: dist/ is produced by `npm run build` (scripts/prerender.mjs)
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "vusolutions.net", "custom_domain": true },
+    { "pattern": "www.vusolutions.net", "custom_domain": true }
+  ]
+}

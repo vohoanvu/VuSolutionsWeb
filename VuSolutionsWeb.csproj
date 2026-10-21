@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Cloudflare static build tooling, not part of the ASP.NET app -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);node_modules/**;dist/**;.build/**;.wrangler/**;package*.json;wrangler.jsonc</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
