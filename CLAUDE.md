@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal/business portfolio site for VU Solutions (Vo Hoan Vu) at https://vusolutions.net. Pages are authored as an ASP.NET Core 8 Razor Pages app, but production has **no .NET runtime**: the Razor pages are prerendered to static HTML at build time and served by a Cloudflare Worker (`vusolutions`, Workers Free plan). The Worker script (`src/worker.js`) only handles `/api/*`, currently the contact form. Single project, no test project.
+Personal/business portfolio site for VU Solutions (Vo Hoan Vu) at https://vusolutions.net. Pages are authored as an ASP.NET Core 10 Razor Pages app, but production has **no .NET runtime**: the Razor pages are prerendered to static HTML at build time and served by a Cloudflare Worker (`vusolutions`, Workers Free plan). The Worker script (`src/worker.js`) only handles `/api/*`, currently the contact form. Single project, no test project.
 
 ## Commands
 
-.NET SDK is pinned to 8.0.404 via `global.json`; Node 22+ is required by Wrangler (`.nvmrc`).
+.NET SDK is pinned to 10.0.403 (latest patch roll-forward) via `global.json`; Node 22+ is required by Wrangler (`.nvmrc`).
 
 ```bash
 dotnet run --launch-profile https     # Razor dev server: https://localhost:7037 (no /api, no Worker)
@@ -37,6 +37,7 @@ There are no tests or linters configured.
 - `wrangler.jsonc`: custom domains `vusolutions.net` and `www.vusolutions.net`; assets from `dist/` with `drop-trailing-slash` and `dist/404.html` (from `Pages/NotFound.cshtml`) for unknown paths; `run_worker_first: ["/api/*"]` so the script never runs for page requests. `cloudflare/_headers` sets cache headers and is copied into `dist/`.
 - **Adding a public page requires adding it to the `pages` list in `scripts/prerender.mjs`** (path -> output file, e.g. `/Home/Portfolio` -> `Home/Portfolio.html`) and to `wwwroot/sitemap.xml`. Anything not in that list is not deployed. Asset paths on Cloudflare are case-sensitive, unlike ASP.NET routing.
 - Only GET-rendered markup survives prerendering. Razor `OnPost` handlers, antiforgery, Identity and EF Core do not run in production; server-side behaviour goes in `src/worker.js`. `Pages/Home/Contact.cshtml` and `About.cshtml` are legacy, unlinked and not prerendered.
+- On .NET 10 the built-in `ScriptTagHelper` processes every `<script>` and HTML-encodes its attributes (`ld+json` becomes `ld&#x2B;json`). Use `<!script>...</!script>` to opt a tag out, as the JSON-LD block in `Index.cshtml` does. `<CompressionEnabled>false</CompressionEnabled>` in the csproj stops publish from writing `.gz`/`.br` copies of every static file into `dist/`.
 
 ## Contact form (`POST /api/contact`)
 
