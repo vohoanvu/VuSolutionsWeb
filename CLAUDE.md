@@ -20,13 +20,10 @@ npm run preview    # wrangler dev: dist/ + the Worker + local D1, like productio
 npm run deploy     # wrangler deploy (needs `wrangler login` or CLOUDFLARE_API_TOKEN/ACCOUNT_ID)
 npx wrangler deploy --dry-run
 
-# D1 (contact submissions). Migrations live in d1-migrations/, NOT migrations/ (that is EF Core's folder)
+# D1 (contact submissions). Migrations live in d1-migrations/
 npx wrangler d1 migrations apply vusolutions-db --local
 npx wrangler d1 migrations apply vusolutions-db --remote   # run manually before deploying a new migration; CI does not
 npx wrangler d1 execute vusolutions-db --remote --command "SELECT * FROM contact_submissions ORDER BY id DESC"
-
-# EF Core migrations (PostgreSQL via Npgsql; local only, unused in production)
-dotnet ef migrations add <Name>
 ```
 
 There are no tests or linters configured.
@@ -36,7 +33,7 @@ There are no tests or linters configured.
 - `.github/workflows/deploy-cloudflare.yml` runs `npm run build` then `npm run deploy` on every push to `main`, using repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Pushing to `main` is a production deploy.
 - `wrangler.jsonc`: custom domains `vusolutions.net` and `www.vusolutions.net`; assets from `dist/` with `drop-trailing-slash` and `dist/404.html` (from `Pages/NotFound.cshtml`) for unknown paths; `run_worker_first: ["/api/*"]` so the script never runs for page requests. `cloudflare/_headers` sets cache headers and is copied into `dist/`.
 - **Adding a public page requires adding it to the `pages` list in `scripts/prerender.mjs`** (path -> output file, e.g. `/Home/Portfolio` -> `Home/Portfolio.html`) and to `wwwroot/sitemap.xml`. Anything not in that list is not deployed. Asset paths on Cloudflare are case-sensitive, unlike ASP.NET routing.
-- Only GET-rendered markup survives prerendering. Razor `OnPost` handlers, antiforgery, Identity and EF Core do not run in production; server-side behaviour goes in `src/worker.js`. `Pages/Home/Contact.cshtml` and `About.cshtml` are legacy, unlinked and not prerendered.
+- Only GET-rendered markup survives prerendering. Razor `OnPost` handlers and antiforgery do not run in production; server-side behaviour goes in `src/worker.js`. `Pages/Home/Contact.cshtml` and `About.cshtml` are legacy, unlinked and not prerendered.
 - On .NET 10 the built-in `ScriptTagHelper` processes every `<script>` and HTML-encodes its attributes (`ld+json` becomes `ld&#x2B;json`). Use `<!script>...</!script>` to opt a tag out, as the JSON-LD block in `Index.cshtml` does. `<CompressionEnabled>false</CompressionEnabled>` in the csproj stops publish from writing `.gz`/`.br` copies of every static file into `dist/`.
 
 ## Contact form (`POST /api/contact`)
@@ -61,12 +58,12 @@ The site follows the CodeJitsu "Zen Samurai" design system (source: `D:\vu-repos
 - Fonts: Cinzel (labels, eyebrows, nav, badges: always uppercase), Noto Serif (headings, narrative), Noto Sans (body, UI, data). Loaded from Google Fonts in `_Layout.cshtml`.
 - Icons: Lucide only, rendered server-side as inline SVG via `Icons.Svg("name", size)` (`Infrastructure/Icons.cs`, path data from lucide-static 0.460.0). Add new icons there from the same package version; don't hand-draw paths.
 - Patterns: dark hero (`.hero`, `.hero--compact`) for page tops, light parchment sections (`.section`, `.section--surface`), `.card`, `.scroll-card` (RationaleCard), `.zen-table`, `.kv-panel`, `.steps`, `.stats`, `.timeline`, `.badge--*`, `.btn--{primary,dark,cta,secondary,ghost,ghost-dark}`. The blood-red `.btn--cta` is for the main call to action only.
-- Bootstrap and jQuery are no longer loaded by the layout (still vendored in `wwwroot/lib`, and the unused Identity pages still reference Bootstrap classes).
+- Bootstrap and jQuery are no longer loaded by the layout (still vendored in `wwwroot/lib`, unused).
 
 ## Architecture (legacy .NET parts)
 
 - **Layout/SEO** in `Pages/Shared/_Layout.cshtml`: pages set `ViewData["Title"]` and `ViewData["Description"]`; the canonical/OG URL is built from `Context.Request.Path` (correct after prerendering because the script requests each real path). `wwwroot/sitemap.xml`, `robots.txt` and the JSON-LD in `Index.cshtml` are maintained by hand.
-- **Identity / EF Core** (`Program.cs`, `Areas/Identity`, `Data/`, `Models/`) are local-only leftovers. `ApplicationDbContext` declares an unused project/time-tracking domain; its fluent config is commented out. `ConnectionStrings:DefaultConnection` is empty; the prerender works without it because public pages never touch the DB.
+- There is no database, Identity or EF Core; they were removed. Don't add a NuGet package that ships static web assets (e.g. `Microsoft.AspNetCore.Identity.UI`) without checking `dist/`: its files get published under `wwwroot/` and deployed publicly.
 
 ## Repo quirks
 
