@@ -37,7 +37,6 @@ npm-debug.log*
 
 # Dependencies
 node_modules/
-wwwroot/lib/
 packages/
 
 # Build results
